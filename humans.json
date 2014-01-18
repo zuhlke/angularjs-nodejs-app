@@ -19,7 +19,7 @@
       "Site Url": "<%= pkg.homepage %>",
       "Keywords": "<%= pkg.keywords %>",
       "Language": "English",
-      "Technology": "node.js, angularjs"
+      "Technology": "node.js, angularjs, mongodb"
     }
   ]
 }
