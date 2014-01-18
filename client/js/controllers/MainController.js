@@ -1,15 +1,11 @@
 'use strict';
 
-angular.module('myApp.controllers').controller('MainController', function($scope, $timeout, promiseTracker) {
+angular.module('myApp.controllers').controller('MainController', function($scope, promiseTracker, userService) {
 
   $scope.loadingTracker = promiseTracker('loadingTracker');
 
-  var promise = $timeout(function() {
-    alert('Delayed something!');
-    }, 5000);
-
-  $scope.loadingTracker.addPromise(promise);
-
-  console.log($scope.loadingTracker.active());
+  userService.getUser('loadingTracker').then(function(users) {
+    console.log(users);
+  });
 
 });

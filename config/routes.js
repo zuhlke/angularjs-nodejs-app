@@ -12,4 +12,10 @@ module.exports = function (app, passport, auth) {
     });
   });
 
+  app.get('/api/v1/users', function(req, res) {
+    setTimeout(function() {
+      res.send([{name: 1}, {name: 2}]);
+    }, 3000);
+  });
+
 };
