@@ -9,15 +9,53 @@ module.exports = function(config) {
 
 
     // frameworks to use
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'chai'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'client/js/**/*.js',
-      'test/karma/unit/**/*Spec.js',
-      'public/vendor/**/*.js'
+      // libraries
+      'public/vendor/angular/angular.min.js',
+      'public/vendor/angular-cookies/angular-cookies.min.js',
+      'public/vendor/angular-route/angular-route.min.js',
+      'public/vendor/restangular/dist/restangular.min.js',
+      'public/vendor/angulartics/dist/angulartics.min.js',
+      'public/vendor/angulartics/dist/angulartics-google-analytics.min.js',
+      'public/vendor/angular-promise-tracker/promise-tracker.min.js',
+
+      // mocks
+      'public/vendor/angular-mocks/angular-mocks.js',
+
+      // application
+      'public/js/app.js',
+      'client/js/controllers/*.js',
+      'client/js/directives/*.js',
+      'client/js/filters/*.js',
+      'client/js/services/*.js',
+      'public/js/version.js',
+
+      // templates
+      'public/views/*.html',
+
+      // tests
+      'test/karma/unit/**/*Spec.js'
     ],
+
+
+    preprocessors : {
+      'public/js/**/*.js' : 'coverage',
+      'public/views/*.html' : [ 'ng-html2js' ]
+    },
+
+
+    ngHtml2JsPreprocessor: {
+      // strip this from the file path
+      // stripPrefix: 'public/',
+
+      // setting this option will create only a single module that contains templates
+      // from all the files, so you can load them all with module('foo')
+      moduleName: 'templates'
+    },
 
 
     // list of files to exclude
@@ -28,7 +66,18 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress'],
+    reporters: ['progress', 'junit', 'coverage'],
+
+
+    coverageReporter : {
+      type : 'text-summary',
+      dir : 'target/karma/coverage/'
+    },
+
+
+    junitReporter : {
+      outputFile : 'target/karma/TEST-javascript.xml'
+    },
 
 
     // web server port

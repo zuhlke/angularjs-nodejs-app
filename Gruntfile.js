@@ -211,7 +211,7 @@ module.exports = function (grunt) {
           require: 'coverage/blanket',
           reporter: 'xunit',
           quiet: true,
-          captureFile: 'target/server-test-reports.xml'
+          captureFile: 'target/mocha/test-reports.xml'
         }
       },
       // Run this task with the 'grunt mochaTest:coverage' command.
@@ -221,7 +221,7 @@ module.exports = function (grunt) {
         options: {
           reporter: 'mocha-cobertura-reporter',
           quiet: true,
-          captureFile: 'server-coverage.xml'
+          captureFile: 'target/mocha/coverage.xml'
         }
       }
     },
@@ -233,7 +233,6 @@ module.exports = function (grunt) {
         configFile: 'test/karma/karma.conf.js',
         singleRun: true
       }
-      // TODO: add coverage to karma
     },
 
     // Grunt task to automate environment configuration for future tasks
