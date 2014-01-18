@@ -1,0 +1,70 @@
+{
+  "name": "angularjs-nodejs-server",
+  "version": "0.0.1-SNAPSHOT",
+  "private": true,
+  "description": "angularjs-nodejs-server ====================",
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.3.x"
+  },
+  "scripts": {
+    "start": "node node_modules/grunt-cli/bin/grunt",
+    "test": "node node_modules/grunt-cli/bin/grunt test",
+    "postinstall": "node node_modules/bower/bin/bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ToastShaman/angularjs-nodejs-server.git"
+  },
+  "author": "Kevin Denver",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/ToastShaman/angularjs-nodejs-server/issues"
+  },
+  "homepage": "https://github.com/ToastShaman/angularjs-nodejs-server",
+  "dependencies": {
+    "express": "~3.4.8",
+    "socket.io": "~0.9.16",
+    "mongoose": "~3.8.4",
+    "helmet": "~0.1.2",
+    "passport": "~0.1.18",
+    "string": "~1.8.0",
+    "q": "~1.0.0",
+    "karma": "~0.10.9",
+    "lodash": "~2.4.1",
+    "passport-local": "~0.1.6"
+  },
+  "devDependencies": {
+    "should": "~3.0.1",
+    "grunt": "~0.4.2",
+    "mocha": "~1.17.0",
+    "blanket": "~1.1.6",
+    "karma-script-launcher": "~0.1.0",
+    "karma-chrome-launcher": "~0.1.2",
+    "karma-firefox-launcher": "~0.1.3",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-jasmine": "~0.1.5",
+    "karma-coffee-preprocessor": "~0.1.2",
+    "requirejs": "~2.1.10",
+    "karma-requirejs": "~0.2.1",
+    "karma-phantomjs-launcher": "~0.1.1",
+    "karma": "~0.10.9",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jshint": "~0.8.0",
+    "mocha-cobertura-reporter": "~1.0.4",
+    "grunt-mocha-test": "~0.8.2",
+    "grunt-humans-txt": "~0.2.1",
+    "grunt-karma": "~0.6.2",
+    "grunt-env": "~0.4.1",
+    "grunt-nodemon": "~0.2.0",
+    "grunt-concurrent": "~0.4.3",
+    "grunt-preprocess": "~4.0.0",
+    "grunt-contrib-compress": "~0.6.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-uglify": "~0.3.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "bower": "~1.2.8",
+    "grunt-contrib-less": "~0.9.0",
+    "karma-mocha": "~0.1.1"
+  }
+}

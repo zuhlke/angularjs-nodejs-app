@@ -1,0 +1,25 @@
+{
+  "team": [
+  {
+    "Engineer": "Kevin Denver",
+    "Site": "https://github.com/ToastShaman",
+    "Twitter": "@ToastShaman",
+    "Location": "London, UK"
+  }
+],
+  "thanks": [
+    {
+      "Name": "Neil Moorcroft",
+      "Website": "https://github.com/nmoorcroft"
+    }
+  ],
+  "site": [
+    {
+      "Version": "<%= pkg.version %>",
+      "Site Url": "<%= pkg.homepage %>",
+      "Keywords": "<%= pkg.keywords %>",
+      "Language": "English",
+      "Technology": "node.js, angularjs"
+    }
+  ]
+}
