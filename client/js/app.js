@@ -26,7 +26,7 @@ angular.module('myApp', [
   RestangularProvider.setBaseUrl('/api/v1');
 });
 
-angular.module('myApp.services', [ 'restangular' ]);
+angular.module('myApp.services', [ 'ajoslin.promise-tracker', 'restangular' ]);
 angular.module('myApp.directives', []);
-angular.module('myApp.controllers', [ 'ajoslin.promise-tracker', 'angulartics.google.analytics', 'restangular' ]);
+angular.module('myApp.controllers', [ 'angulartics.google.analytics' ]);
 angular.module('myApp.filters', []);

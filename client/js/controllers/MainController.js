@@ -1,10 +1,8 @@
 'use strict';
 
-angular.module('myApp.controllers').controller('MainController', function($scope, promiseTracker, userService) {
+angular.module('myApp.controllers').controller('MainController', function($scope, userService) {
 
-  $scope.loadingTracker = promiseTracker('loadingTracker');
-
-  userService.getUser('loadingTracker').then(function(users) {
+  userService.getUser().then(function(users) {
     console.log(users);
   });
 

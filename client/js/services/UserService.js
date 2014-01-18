@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('myApp.services').factory('userService', function($timeout, Restangular) {
+angular.module('myApp.services').factory('userService', function(loadingService, Restangular) {
 
   var baseUsers = Restangular.all('users');
 
   return {
 
-    getUser: function(trackerId) {
+    getUser: function() {
       return baseUsers.withHttpConfig({
-        tracker: trackerId
+        tracker: loadingService.getTrackerId()
       }).getList();
     }
 
