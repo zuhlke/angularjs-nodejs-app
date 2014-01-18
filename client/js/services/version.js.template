@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('myApp.services').value('version', '<!-- @echo version -->');
+services.value('version', '<!-- @echo version -->');

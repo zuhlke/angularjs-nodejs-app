@@ -65,7 +65,7 @@ module.exports = function (grunt) {
       // Run this task with the 'grunt concat:client' command.
       client : {
         options : {
-          separator : ';'
+          separator : '\n'
         },
         src : [ 'client/js/app.js', 'client/js/**/*.js'],
         dest : 'public/js/app.js'
@@ -156,23 +156,12 @@ module.exports = function (grunt) {
         livereload: true
       },
       clientJs: {
-        files: ['client/js/**/*.js'],
-        tasks: ['jshint', 'concat:client']
+        files: ['client/js/**/*.js', 'client/js/**/*.template'],
+        tasks: ['preprocess', 'concat:client', 'uglify:client']
       },
       clientCss: {
         files: ['client/css/**/*.less'],
         tasks: ['less:dev']
-      },
-      views: {
-        files: ['public/**/*.html']
-      },
-      server: {
-        files: ['server.js', 'server/**/*.js'],
-        tasks: ['jshint']
-      },
-      tests: {
-        files: ['test/mocha/**/*Spec.js'],
-        tasks: ['mochaTest:spec']
       }
     },
 

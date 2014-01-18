@@ -19,3 +19,6 @@ public/humans.txt
 public/js/version.js
 target
 .idea
+public/js/app.min.js
+public/js/app.js
+
