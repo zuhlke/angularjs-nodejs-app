@@ -1,15 +1,15 @@
 'use strict';
 
-var myApp = angular.module('myApp', [
-  'ngRoute',
-  'myApp.services',
-  'myApp.filters',
-  'myApp.directives',
-  'myApp.controllers'
-]);
-
-myApp.config(['$routeProvider',
-  function($routeProvider) {
+angular.module('myApp', [
+    'ajoslin.promise-tracker',
+    'angulartics',
+    'angulartics.google.analytics',
+    'ngRoute',
+    'myApp.services',
+    'myApp.filters',
+    'myApp.directives',
+    'myApp.controllers'
+]).config(function($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -18,9 +18,12 @@ myApp.config(['$routeProvider',
       .otherwise({
         redirectTo: '/'
       });
-}]);
+}).config(function($analyticsProvider) {
+  // turn off automatic tracking
+  $analyticsProvider.virtualPageviews(false);
+});
 
-var controllers = angular.module('myApp.controllers', []);
-var services = angular.module('myApp.services', []);
-var directives = angular.module('myApp.directives', []);
-var filters = angular.module('myApp.filters', []);
+angular.module('myApp.services', []);
+angular.module('myApp.directives', []);
+angular.module('myApp.controllers', [ 'ajoslin.promise-tracker', 'angulartics.google.analytics' ]);
+angular.module('myApp.filters', []);
