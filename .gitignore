@@ -21,4 +21,4 @@ target
 .idea
 public/js/app.min.js
 public/js/app.js
-
+vagrant/.vagrant/**

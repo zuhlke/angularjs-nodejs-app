@@ -58,3 +58,25 @@ To run the tests, simply run the Grunt `test` task like so:
 ```
 # grunt test
 ```
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Added some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
+
+## Contributors
+
+Many thanks go to the following who have contributed to making this even better:
+
+* **[@nmoorcroft](https://github.com/nmoorcroft)**
+
+
+## License
+
+**angularjs-nodejs-app**
+
+* Freely distributable and licensed under the [MIT license](http://phlipper.mit-license.org/2011-2013/license.html).
