@@ -15,6 +15,13 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // libraries
+      'public/vendor/jquery/jquery.min.js',
+      'public/vendor/underscore/underscore-min.js',
+      'public/vendor/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js',
+      'public/vendor/html5-boilerplate/js/plugins.js',
+      'public/vendor/html5-boilerplate/js/main.js',
+      'public/vendor/bootstrap/dist/js/bootstrap.min.js',
+      'public/vendor/alertify/alertify.min.js',
       'public/vendor/angular/angular.min.js',
       'public/vendor/angular-cookies/angular-cookies.min.js',
       'public/vendor/angular-route/angular-route.min.js',
@@ -29,9 +36,9 @@ module.exports = function(config) {
       // application
       'public/js/app.js',
       'client/js/controllers/*.js',
-      'client/js/directives/*.js',
       'client/js/filters/*.js',
       'client/js/services/*.js',
+      'client/js/directives/*.js',
       'public/js/version.js',
 
       // templates

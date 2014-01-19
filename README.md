@@ -26,7 +26,7 @@ and run
 
 ## Starting the Node.js Server
 
-Run the default Grunt task to compile the CSS and minify the resources:
+Run the `default` Grunt task to compile the CSS and minify the resources:
 
 ```
 # grunt
@@ -47,4 +47,12 @@ Node command
 
 ```
 # PORT=5000 node server.js
+```
+
+## Running the Tests
+
+To run the tests, simply run the Grunt `test` task like so:
+
+```
+# grunt test
 ```

@@ -69,6 +69,7 @@
     "karma-chai": "0.0.2",
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-coverage": "~0.1.4",
-    "karma-junit-reporter": "~0.2.1"
+    "karma-junit-reporter": "~0.2.1",
+    "grunt-cli": "~0.1.11"
   }
 }
