@@ -1,5 +1,7 @@
 # AngularJS and Node.js best practices
 
+[![Build Status](https://travis-ci.org/ToastShaman/angularjs-nodejs-app.png?branch=master)](https://travis-ci.org/ToastShaman/angularjs-nodejs-app)
+
 This project should serve as a reference for writing web application on top of Node.js and Angular.js.
 
 It is built on top of **AngularJS 1.2.9**, **Node.js 0.10.24** and **MongoDB 2.4.7**.

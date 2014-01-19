@@ -285,4 +285,14 @@ module.exports = function (grunt) {
   // Test task for use in Jenkins.
   grunt.registerTask('jenkins', ['env:test', 'mochaTest:xunit', 'mochaTest:coverage', 'karma:unit']);
 
+  // Test task for use in Jenkins.
+  grunt.registerTask('travis', [
+    'env:test',
+    'humans_txt',
+    'preprocess',
+    'less:dev',
+    'concat',
+    'uglify',
+    'mochaTest:spec',
+    'karma:unit']);
 };
