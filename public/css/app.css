@@ -13,7 +13,7 @@
   bottom: 20%;
   /* Footer Height */
   background-color: #444444;
-  background: url(http://mymaplist.com/img/parallax/pinlayer2.png), url(http://mymaplist.com/img/parallax/pinlayer1.png), url(http://mymaplist.com/img/parallax/back.png);
+  background: url('../img/pinlayer2.png'), url('../img/pinlayer1.png'), url('../img/back.png');
 }
 .center {
   float: none;
