@@ -7,7 +7,7 @@
 // Uses the angular-promise-tracker library
 angular.module('myApp.directives').directive('footer', function(loadingService) {
   return {
-    restrict: 'A',
+    restrict: 'E',
     replace: true,
     templateUrl: 'views/footer.html',
     link: function(scope) {
