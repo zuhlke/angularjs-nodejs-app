@@ -41,20 +41,22 @@ module.exports = function (grunt) {
       // Run this task with the 'grunt less:dev' command.
       dev: {
         options: {
-          paths: [ 'client/css' ]
+          paths: [ 'client/css' ],
+          concat: true
         },
         files: {
-          'public/css/app.css': 'client/css/app.less'
+          'public/css/app.css': 'client/css/**/*.less'
         }
       },
       // Run this task with the 'grunt less:prod' command.
       prod: {
         options: {
           paths: [ 'client/css' ],
+          concat: true,
           cleancss: true
         },
         files: {
-          'public/css/app.css': 'client/css/app.less'
+          'public/css/app.css': 'client/css/**/*.less'
         }
       }
     },

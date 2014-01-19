@@ -1,0 +1,23 @@
+@loginBackgroundColor: #444;
+@loginBackgroundUrl: url(http://mymaplist.com/img/parallax/back.png);
+@loginBackgroundPinLayer1: url(http://mymaplist.com/img/parallax/pinlayer1.png);
+@loginBackgroundPinLayer2: url(http://mymaplist.com/img/parallax/pinlayer2.png);
+
+.loginBanner {
+  position: absolute;
+  width: 100%;
+  top: 20%; /* Header Height */
+  bottom: 20%; /* Footer Height */
+  background-color: @loginBackgroundColor;
+  background: @loginBackgroundPinLayer2, @loginBackgroundPinLayer1, @loginBackgroundUrl;
+}
+
+.center {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vertical-offset-100 {
+  padding-top:100px;
+}

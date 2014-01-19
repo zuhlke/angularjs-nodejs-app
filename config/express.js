@@ -6,7 +6,6 @@
 var express = require('express');
 var helmet = require('helmet');
 var config = require('./config');
-var path = require('path');
 
 module.exports = function(app, passport, db) {
 
@@ -20,7 +19,7 @@ module.exports = function(app, passport, db) {
     // example configuration.
     app.use(express.compress());
 
-    app.use(express.static(path.join(__dirname, 'public'), {
+    app.use(express.static(config.root + '/public', {
       maxAge : 86400000 // one day
     }));
 
@@ -39,7 +38,5 @@ module.exports = function(app, passport, db) {
   app.use(app.router);
 
   app.use(express.favicon());
-
-  app.use(express.static(config.root + '/public'));
 
 };

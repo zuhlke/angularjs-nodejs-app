@@ -29,6 +29,7 @@ module.exports = function(config) {
       'public/vendor/angulartics/dist/angulartics.min.js',
       'public/vendor/angulartics/dist/angulartics-google-analytics.min.js',
       'public/vendor/angular-promise-tracker/promise-tracker.min.js',
+      'public/vendor/greensock/src/minified/TweenLite.min.js',
 
       // mocks
       'public/vendor/angular-mocks/angular-mocks.js',

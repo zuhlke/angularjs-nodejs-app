@@ -11,19 +11,26 @@ angular.module('myApp', [
     'myApp.directives',
     'myApp.controllers'
 ]).config(function($routeProvider) {
+
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainController'
+        templateUrl: 'views/login.html',
+        controller: 'LoginController'
       })
       .otherwise({
         redirectTo: '/'
       });
+
 }).config(function($analyticsProvider) {
-  // turn off automatic tracking
-  $analyticsProvider.virtualPageviews(false);
+
+    // turn off virtual page tracking
+    $analyticsProvider.virtualPageviews(false);
+
 }).config(function(RestangularProvider) {
-  RestangularProvider.setBaseUrl('/api/v1');
+
+    // set's the base path for all API calls to '/api/v1'
+    RestangularProvider.setBaseUrl('/api/v1');
+
 });
 
 angular.module('myApp.services', [ 'ajoslin.promise-tracker', 'restangular' ]);
