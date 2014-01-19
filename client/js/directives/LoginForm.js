@@ -2,14 +2,24 @@
 
 // A directive applying DOM modifications in the link function using jQuery.
 // Makes the pin moves on the LoginForm background.
+
+// Also contains our view model.
 angular.module('myApp.directives').directive('loginForm', function() {
   return {
     restrict: 'E',
     replace: true,
     templateUrl: 'views/loginForm.html',
+    scope: {
+      onSubmit: '&',
+      formErrors: '='
+    },
     link: function(scope) {
-      $('.loginBanner').mousemove(function(e) {
 
+      scope.submitLogin = function() {
+        scope.onSubmit({user: scope.login});
+      };
+
+      $('.loginBanner').mousemove(function(e) {
         var newPosition = parseInt(e.pageX/8) + "px "
           + parseInt(e.pageY/12) + "px, "
           + parseInt(e.pageX/15) + "px "
