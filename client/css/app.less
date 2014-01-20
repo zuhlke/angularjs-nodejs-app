@@ -1,7 +1,20 @@
+
+@validInputColor: green;
+@invalidInputColor: red;
+
+// Shows a red border around input fields when they're dirty and invalid
 input.ng-dirty.ng-invalid {
-  border: 1px solid red;
+  border: 1px solid @invalidInputColor;
 }
 
+// Shows a green border around input fields when they're dirty and invalid
 input.ng-dirty.ng-valid {
-    border: 1px solid green;
+    border: 1px solid @validInputColor;
+}
+
+// Centers the div on the screen
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
