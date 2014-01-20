@@ -1,4 +1,4 @@
-# AngularJS and Node.js best practices
+# AngularJS and Node.js good practices
 
 [![Build Status](https://travis-ci.org/ToastShaman/angularjs-nodejs-app.png?branch=master)](https://travis-ci.org/ToastShaman/angularjs-nodejs-app)
 
