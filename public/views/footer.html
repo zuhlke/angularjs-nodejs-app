@@ -4,11 +4,11 @@
     <p class="navbar-text navbar-left">
       <span class="small">
         <a href="http://www.zuehlke.com" target="_blank">Zuhlke Engineering Ltd.</a>
-        (v<span class="small" app-version></span>)
+        (v<span id="appversion" class="small" app-version></span>)
     </p>
 
     <p class="navbar-text navbar-right">
-      <span ng:show="!loadingTracker.active()"><i id="ajaxSpinnerIcon" class="fa fa-refresh fa-2x fa-spin"></i> Loading...</span>
+      <span ng:show="loadingTracker.active()"><i id="ajaxSpinnerIcon" class="fa fa-refresh fa-2x fa-spin"></i> Loading...</span>
     </p>
 
   </nav>

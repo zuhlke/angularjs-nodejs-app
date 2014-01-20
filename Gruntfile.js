@@ -238,6 +238,16 @@ module.exports = function (grunt) {
       }
     },
 
+    // Runs our e2e tests with protractor
+    mochaProtractor: {
+      options: {
+        browsers: ['Chrome', 'Firefox'],
+        reporter: 'Spec',
+        baseUrl: 'http://localhost:3000'
+      },
+      files: ['test/e2e/unit/**/*Spec.js']
+    },
+
     // Grunt task to automate environment configuration for future tasks
     // https://github.com/jsoverson/grunt-env
     env: {
@@ -259,6 +269,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-mocha-test');
+  grunt.loadNpmTasks('grunt-mocha-protractor');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
