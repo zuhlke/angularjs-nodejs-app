@@ -21,4 +21,5 @@ target
 .idea
 public/js/app.min.js
 public/js/app.js
+public/css/app.css
 vagrant/.vagrant/**
