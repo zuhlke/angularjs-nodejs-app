@@ -10,14 +10,14 @@ It is built on top of **AngularJS 1.2.9**, **Node.js 0.10.24** , **Redis 2.8.3**
 
 ### Currently Implemented
 
-** Build Infrastructure
-** Application Skeleton
+* Build Infrastructure
+* Application Skeleton
 
 ### TBD
 
-** User Authentication and Authorization
-** File Uploads
-** ...
+* User Authentication and Authorization
+* File Uploads
+* ...
 
 ## Installation
 
