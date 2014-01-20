@@ -37,7 +37,6 @@
     "log4js": "~0.6.9"
   },
   "devDependencies": {
-    "should": "~3.0.1",
     "grunt": "~0.4.2",
     "mocha": "~1.17.0",
     "blanket": "~1.1.6",
@@ -72,6 +71,9 @@
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-coverage": "~0.1.4",
     "karma-junit-reporter": "~0.2.1",
-    "grunt-cli": "~0.1.11"
+    "grunt-cli": "~0.1.11",
+    "chai-as-promised": "~4.1.0",
+    "chai": "~1.8.1",
+    "mocha-as-promised": "~2.0.0"
   }
 }

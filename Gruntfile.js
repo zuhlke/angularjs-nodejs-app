@@ -200,16 +200,16 @@ module.exports = function (grunt) {
     mochaTest: {
       spec: {
         // Run this task with the 'grunt mochaTest:spec' command.
-        src: ['test/mocha/**/*Spec.js'],
+        src: ['test/mocha/unit/**/*Spec.js'],
         options: {
           reporter: 'spec',
-          require: 'server.js'
+          require: ['server.js', 'test/mocha/mocha.conf.js']
         }
       },
       // Run this task with the 'grunt mochaTest:xunit' command.
       // Outputs xunit results for the integration into Jenkins
       xunit: {
-        src: ['test/mocha/**/*Spec.js'],
+        src: ['test/mocha/unit/**/*Spec.js'],
         options: {
           require: 'coverage/blanket',
           reporter: 'xunit',
@@ -220,7 +220,7 @@ module.exports = function (grunt) {
       // Run this task with the 'grunt mochaTest:coverage' command.
       // Outputs cobertura results for the integration into Jenkins
       coverage: {
-        src: ['test/mocha/**/*Spec.js'],
+        src: ['test/mocha/unit/**/*Spec.js'],
         options: {
           reporter: 'mocha-cobertura-reporter',
           quiet: true,
@@ -289,5 +289,6 @@ module.exports = function (grunt) {
   grunt.registerTask('jenkins', ['env:test', 'mochaTest:xunit', 'mochaTest:coverage', 'karma:unit']);
 
   // Test task for use in Travis.
-  grunt.registerTask('travis', ['default', 'test']);
+  grunt.registerTask('travis', ['env:test', 'default', 'test']);
+
 };
