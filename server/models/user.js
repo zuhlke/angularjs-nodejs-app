@@ -40,7 +40,6 @@ UserSchema.methods = {
    *
    * @param {String} plainText
    * @return {Boolean}
-   * @api public
    */
   authenticate: function(plainText) {
     var deferred = Q.defer();
@@ -57,7 +56,6 @@ UserSchema.methods = {
    * Creates a salt
    *
    * @returns {Promise|salt}
-   * @api public
    */
   makeSalt: function() {
     return Q.nfcall(crypto.randomBytes, 512).then(function(buf) {
@@ -71,8 +69,7 @@ UserSchema.methods = {
    * Encrypt the password
    *
    * @param password
-   * @returns {Promise|the encrypted password}
-   * @api public
+   * @returns {Promise|String} the encrypted password as base64
    */
   encryptPassword: function(password) {
     return Q.nfcall(crypto.pbkdf2, password, new Buffer(this.salt, 'base64'), 10000, 64).then(function(derivedKey) {
@@ -86,8 +83,7 @@ UserSchema.methods = {
    * Sets the password on the user object
    *
    * @param password
-   * @returns {Promise|encrypted password}
-   * @api public
+   * @returns {Promise|String} the encrypted password as base64
    */
   setPassword: function(password) {
     var user = this;
@@ -105,7 +101,7 @@ UserSchema.methods = {
   /**
    * Makes an AUTH token
    *
-   * @returns {Promise|auth token}
+   * @returns {Promise|String} an AUTH token as base64
    */
   makeAuthToken: function() {
     return Q.nfcall(crypto.randomBytes(1024)).then(function(buf) {
