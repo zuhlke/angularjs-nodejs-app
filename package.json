@@ -32,7 +32,9 @@
     "q": "~1.0.0",
     "karma": "~0.10.9",
     "lodash": "~2.4.1",
-    "passport-local": "~0.1.6"
+    "passport-local": "~0.1.6",
+    "then-redis": "~0.3.9",
+    "log4js": "~0.6.9"
   },
   "devDependencies": {
     "should": "~3.0.1",

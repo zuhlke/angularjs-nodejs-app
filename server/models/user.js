@@ -1,93 +1,40 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
-var mongoose = require('mongoose'),
-  Schema = mongoose.Schema,
-  crypto = require('crypto'),
-  authTypes = ['github', 'twitter', 'facebook', 'google'];
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var crypto = require('crypto');
+var Q = require('q');
 
-
-/**
- * User Schema
- */
+// Defines our user model
 var UserSchema = new Schema({
+
   name: String,
-  email: String,
-  username: {
+
+  email: {
     type: String,
     unique: true
   },
-  hashed_password: String,
-  provider: String,
+
   salt: String,
-  facebook: {},
-  twitter: {},
-  github: {},
-  google: {}
+
+  hashed_password: String,
+
+  created : {
+    type : Date,
+    default : Date.now
+  }
+
 });
 
-/**
- * Virtuals
- */
-UserSchema.virtual('password').set(function (password) {
-  this._password = password;
-  this.salt = this.makeSalt();
-  this.hashed_password = this.encryptPassword(password);
-}).get(function () {
-    return this._password;
-  });
+// Adds a static method to the schema
+UserSchema.statics.findByEmail = function(email) {
+  return this.findOne({email: email}).exec();
+}
 
-/**
- * Validations
- */
-var validatePresenceOf = function (value) {
-  return value && value.length;
-};
-
-// the below 4 validations only apply if you are signing up traditionally
-UserSchema.path('name').validate(function (name) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) return true;
-  return name.length;
-}, 'Name cannot be blank');
-
-UserSchema.path('email').validate(function (email) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) return true;
-  return email.length;
-}, 'Email cannot be blank');
-
-UserSchema.path('username').validate(function (username) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) return true;
-  return username.length;
-}, 'Username cannot be blank');
-
-UserSchema.path('hashed_password').validate(function (hashed_password) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) return true;
-  return hashed_password.length;
-}, 'Password cannot be blank');
-
-
-/**
- * Pre-save hook
- */
-UserSchema.pre('save', function (next) {
-  if (!this.isNew) return next();
-
-  if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1)
-    next(new Error('Invalid password'));
-  else
-    next();
-});
-
-/**
- * Methods
- */
+// Instances of Models are documents. Documents have many of their own built-in
+// instance methods. We may also define our own custom document instance methods too.
 UserSchema.methods = {
+
   /**
    * Authenticate - check if the passwords are the same
    *
@@ -95,31 +42,77 @@ UserSchema.methods = {
    * @return {Boolean}
    * @api public
    */
-  authenticate: function (plainText) {
-    return this.encryptPassword(plainText) === this.hashed_password;
+  authenticate: function(plainText) {
+    var deferred = Q.defer();
+    this.encryptPassword(plainText).then(function(hashedPassword) {
+      if (this.hashed_password === hashedPassword) {
+        deferred.resolve(this);
+      }
+      deferred.reject(this);
+    });
+    return deferred.promise;
   },
 
   /**
-   * Make salt
+   * Creates a salt
    *
-   * @return {String}
+   * @returns {Promise|salt}
    * @api public
    */
-  makeSalt: function () {
-    return crypto.randomBytes(16).toString('base64');
+  makeSalt: function() {
+    return Q.nfcall(crypto.randomBytes, 512).then(function(buf) {
+      return buf.toString('base64');
+    }).fail(function(err) {
+      throw err;
+    });
   },
 
   /**
-   * Encrypt password
+   * Encrypt the password
    *
-   * @param {String} password
-   * @return {String}
+   * @param password
+   * @returns {Promise|the encrypted password}
    * @api public
    */
-  encryptPassword: function (password) {
-    if (!password || !this.salt) return '';
-    var salt = new Buffer(this.salt, 'base64');
-    return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+  encryptPassword: function(password) {
+    return Q.nfcall(crypto.pbkdf2, password, new Buffer(this.salt, 'base64'), 10000, 64).then(function(derivedKey) {
+      return derivedKey.toString('base64');
+    }).fail(function(err) {
+      throw err;
+    });
+  },
+
+  /**
+   * Sets the password on the user object
+   *
+   * @param password
+   * @returns {Promise|encrypted password}
+   * @api public
+   */
+  setPassword: function(password) {
+    var user = this;
+    return this.makeSalt().then(function(salt) {
+      user.salt = salt;
+      return user.encryptPassword(password);
+    }).then(function(hashedPassword) {
+        user.hashed_password = hashedPassword;
+        return hashedPassword;
+    }).fail(function(err) {
+        throw err;
+    });
+  },
+
+  /**
+   * Makes an AUTH token
+   *
+   * @returns {Promise|auth token}
+   */
+  makeAuthToken: function() {
+    return Q.nfcall(crypto.randomBytes(1024)).then(function(buf) {
+      return buf.toString('base64');
+    }).fail(function(err) {
+      throw err;
+    });
   }
 };
 

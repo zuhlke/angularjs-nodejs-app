@@ -1,16 +1,18 @@
 'use strict';
 
-angular.module('myApp.controllers').controller('LoginController', function($scope) {
+angular.module('myApp.controllers').controller('LoginController', function($scope, authenticationService) {
 
-  $scope.errors = {extra: 'Hey'};
+  $scope.errors = {};
 
   var sendLogin = function(user) {
-    console.log(user.email);
-    console.log(user.password);
+    authenticationService.authenticate(user).then(function() {
+      console.log('User authenticated');
+    }, function(resp) {
+      $scope.errors.extra = 'Invalid username or password';
+      console.log('Error with status code', resp.status);
+    });
   };
 
-
   $scope.sendLogin = sendLogin;
-
 
 });

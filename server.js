@@ -20,9 +20,11 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var config = require('./config/config');
 var auth = require('./config/middlewares/authorization');
 var mongoose = require('mongoose');
+var redis = require('then-redis');
 
 // Bootstrap db connection
 var db = mongoose.connect(config.db);
+var redis = redis.createClient(config.redis);
 
 // Bootstrap models
 var models_path = __dirname + '/server/models';
@@ -57,6 +59,7 @@ var port = process.env.PORT || config.port;
 app.listen(port);
 console.log('Express server started on port ' + port);
 
+// Log which environemt we're running on to the console
 if (process.env.NODE_ENV === 'development') {
   console.log('=== DEVELOPMENT MODE ===');
 } else {
