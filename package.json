@@ -34,7 +34,9 @@
     "lodash": "~2.4.1",
     "passport-local": "~0.1.6",
     "then-redis": "~0.3.9",
-    "log4js": "~0.6.9"
+    "log4js": "~0.6.9",
+    "nconf": "~0.6.9",
+    "bcrypt": "~0.7.7"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
