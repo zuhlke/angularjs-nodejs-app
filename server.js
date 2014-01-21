@@ -8,42 +8,34 @@ var fs = require('fs');
 var passport = require('passport');
 
 //
-// Main application entry file.
-// Please note that the order of loading is important.
-//
-
 // Load configurations
 // Set the node enviornment variable if not set before
+//
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-// Initializing system variables 
+//
+// Initialising system variables
+//
 var config = require('./config/config');
-var auth = require('./config/middlewares/authorization');
 var mongoose = require('mongoose');
 var redis = require('then-redis');
 
+//
 // Bootstrap db connection
+//
 var db = mongoose.connect(config.db);
 var redis = redis.createClient(config.redis);
 
+//
 // Bootstrap models
-var models_path = __dirname + '/server/models';
-var walk = function (path) {
-  fs.readdirSync(path).forEach(function (file) {
-    var newPath = path + '/' + file;
-    var stat = fs.statSync(newPath);
-    if (stat.isFile()) {
-      if (/(.*)\.(js$|coffee$)/.test(file)) {
-        require(newPath);
-      }
-    } else if (stat.isDirectory()) {
-      walk(newPath);
-    }
-  });
-};
-walk(models_path);
+//
+var passportLocalMongoose = require('./config/middlewares/passport-local-moongose');
+require('./server/models/User')(passportLocalMongoose);
+var auth = require('./config/middlewares/authorization');
 
+//
 // Bootstrap passport config
+//
 require('./config/passport')(passport);
 
 var app = express();
@@ -62,7 +54,9 @@ console.log('Express server started on port ' + port);
 // Log which environemt we're running on to the console
 if (process.env.NODE_ENV === 'development') {
   console.log('=== DEVELOPMENT MODE ===');
-} else {
+} else if (process.env.NODE_ENV === 'test') {
+  console.log('=== TEST MODE ===');
+} else if (process.env.NODE_ENV === 'prod') {
   console.log('=== PRODUCTION MODE ===');
 }
 

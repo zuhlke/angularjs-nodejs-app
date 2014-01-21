@@ -9,7 +9,7 @@ module.exports = function (app, passport, auth) {
   app.get('/', index.render);
 
   // Login
-  app.post('/api/v1/authenticate', passport.authenticate('local', {session: false}), function(req, res) {
+  app.post('/api/v1/authenticate', passport.authenticate('local'), function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
     res.send(req.user);

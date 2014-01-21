@@ -12,6 +12,7 @@ module.exports = function(app, passport, db) {
   // For security sake, it's better to disable file upload if your application
   // doesn't need it. To do this, use only the needed middleware, i.e.
   // don't use the bodyParser and multipart() middleware:
+  app.use(express.cookieParser());
   app.use(express.json());
   app.use(express.urlencoded());
 
@@ -37,6 +38,8 @@ module.exports = function(app, passport, db) {
 
     // Use the express logger to log the requests
     app.use(express.logger('dev'));
+
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
   }
 
   app.use(express.favicon("public/favicon.ico"));
