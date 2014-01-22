@@ -8,7 +8,7 @@ module.exports = function (app) {
 
     var user1 = new User({
       name: 'Jane Doe',
-      username: 'admin1@test.com',
+      username: 'admin@test.com',
       password: 'password',
       role: 'admin'
     });
