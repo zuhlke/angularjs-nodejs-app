@@ -8,11 +8,14 @@ exports.localStrategy = function () {
 
   return new LocalStrategy(function (username, password, done) {
     User.findOne({username: username}).exec().then(function(user) {
+      if (!user) {return done(user); }
       user.passwordMatches(password, function(err, matches) {
         if (err) { return done(user); }
         if (!matches) { return done(user); }
         return done(null, user);
       });
+    }).then(null, function(err) {
+        if (err) { return done(err); }
     });
   });
 

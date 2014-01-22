@@ -34,6 +34,9 @@ angular.module('myApp', [
 
     // set's the base path for all API calls to '/api/v1'
     RestangularProvider.setBaseUrl('/api/v1');
+    RestangularProvider.setRestangularFields({
+      selfLink: 'linkHref' // the attribute in our documents to link to themselves
+    });
 
 });
 

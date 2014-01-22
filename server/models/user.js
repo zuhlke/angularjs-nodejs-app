@@ -15,6 +15,8 @@ var userModel = function () {
       unique: true
     },
 
+    linkHref: String,
+
     password: String,
 
     role: String
@@ -23,7 +25,6 @@ var userModel = function () {
   userSchema.pre('save', function (next) {
     var user = this;
 
-    //If the password has not been modified in this save operation, leave it alone (So we don't double hash it)
     if (!user.isModified('password')) {
       next();
       return;
@@ -34,9 +35,14 @@ var userModel = function () {
     bcrypt.hash(user.password, DIFFICULTY, function(err, res) {
       user.password = res;
       next();
-
     });
 
+  });
+
+  userSchema.pre('save', function (next) {
+    var user = this;
+    user.linkHref = user.username;
+    next();
   });
 
   /**

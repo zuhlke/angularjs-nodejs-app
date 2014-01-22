@@ -1,7 +1,15 @@
 {
   "mongodb": "mongodb://localhost/myApp-test",
 
-  "redis" : "tcp://myApp-test:password@localhost:6379"
+  "port" : 8000,
 
-  "port" : 3001
+  "bcrypt": {
+    "difficulty": 8
+  },
+
+  "cookieStore": {
+    "url": "mongodb://localhost/myApp-test/sessions",
+    "secret": "Jah3ooth4jah4miemieB"
+  }
+
 }

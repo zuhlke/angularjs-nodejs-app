@@ -17,13 +17,11 @@ nconf.argv().env().file({ file: configPath });
 //
 console.log('ENV: ' + nconf.get('NODE_ENV'));
 console.log('MongoDB: ' + nconf.get('mongodb'));
-console.log('Redis: ' + nconf.get('redis'));
 
 //
 // Bootstrap the database connections
 //
 var mongodb = require('./server/lib/mongodb');
-var redis = require('./server/lib/redis');
 
 //
 // Create and configure the express app

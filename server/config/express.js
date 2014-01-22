@@ -5,7 +5,9 @@ var mongoose = require('mongoose'),
   express = require('express'),
   passport = require('passport'),
   auth = require('../lib/passport-local-strategy'),
-  nconf = require('nconf');
+  nconf = require('nconf'),
+  User = require('../models/user'),
+  MongoStore = require('connect-mongo')(express);
 
 var createApp = function () {
 
@@ -21,9 +23,28 @@ var createApp = function () {
 
   app.use(express.favicon("public/favicon.ico"));
 
-  app.use(passport.initialize({session: false}));
+  app.use(express.session({
+    secret: nconf.get('cookieStore').secret,
+    store: new MongoStore(nconf.get('cookieStore'))
+  }));
+
+  app.use(passport.initialize());
+
+  app.use(passport.session());
 
   passport.use(auth.localStrategy());
+
+  app.use(auth.injectUser);
+
+  passport.serializeUser(function (user, done) {
+    done(null, user.id);
+  });
+
+  passport.deserializeUser(function (id, done) {
+    User.findOne({_id: id}, function (err, user) {
+      done(null, user);
+    });
+  });
 
   if (nconf.get('NODE_ENV') === 'development') {
 

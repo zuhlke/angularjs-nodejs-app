@@ -8,14 +8,14 @@ module.exports = function (app) {
 
     var user1 = new User({
       name: 'Jane Doe',
-      username: 'admin@test.com',
+      username: 'admin1@test.com',
       password: 'password',
       role: 'admin'
     });
 
-    user1.save();
-
-    res.json(user1);
+    user1.save(function(err, user) {
+      res.json(user);
+    });
 
   });
 
