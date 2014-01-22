@@ -4,6 +4,7 @@ var express = require('express'),
   fs = require('fs'),
   path = require('path'),
   glob = require("glob"),
+  pjson = require('./package.json'),
   nconf = require('nconf');
 
 //
@@ -11,10 +12,11 @@ var express = require('express'),
 //
 var configPath = 'server/config/config-' + process.env.NODE_ENV + '.json';
 nconf.argv().env().file({ file: configPath });
-
+nconf.set('version', pjson.version);
 //
 // Printing some environment variables
 //
+console.log('Version: ' + nconf.get('version'));
 console.log('ENV: ' + nconf.get('NODE_ENV'));
 console.log('MongoDB: ' + nconf.get('mongodb'));
 

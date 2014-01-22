@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
   auth = require('../lib/passport-local-strategy'),
   nconf = require('nconf'),
   User = require('../models/user'),
+  exphbs  = require('express3-handlebars'),
   MongoStore = require('connect-mongo')(express);
 
 var createApp = function () {
@@ -45,6 +46,10 @@ var createApp = function () {
       done(null, user);
     });
   });
+
+  app.set('views', './server/views');
+  app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+  app.set('view engine', 'handlebars');
 
   if (nconf.get('NODE_ENV') === 'development') {
 

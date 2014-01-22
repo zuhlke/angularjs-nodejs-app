@@ -1,4 +1,6 @@
 {
+  "title": "My App (Development)",
+
   "mongodb": "mongodb://localhost/myApp-dev",
 
   "port" : 8000,

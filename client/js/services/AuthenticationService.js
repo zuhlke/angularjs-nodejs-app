@@ -7,9 +7,11 @@ angular.module('myApp.services').factory('authenticationService', function(Resta
   return {
 
     authenticate: function(user) {
+
       return baseAuth.withHttpConfig({
         tracker: loadingService.getTrackerId()
       }).post(user);
+
     }
 
   }

@@ -1,4 +1,6 @@
 {
+  "title": "My App (Test)",
+
   "mongodb": "mongodb://localhost/myApp-test",
 
   "port" : 8000,

@@ -19,22 +19,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Creates a version.json file
-    // We can then use the current version number within angular
-    // https://github.com/jsoverson/grunt-preprocess
-    preprocess : {
-      // Run this task with the 'grunt preprocess:all' command.
-      all : {
-        src: 'client/js/services/version.js.template',
-        dest: 'public/js/version.js',
-        options : {
-          context : {
-            version : '<%= pkg.version %>'
-          }
-        }
-      }
-    },
-
     // Compile our LESS sources
     // https://github.com/gruntjs/grunt-contrib-less
     less: {
@@ -159,7 +143,7 @@ module.exports = function (grunt) {
       },
       clientJs: {
         files: ['client/js/**/*.js', 'client/js/**/*.template'],
-        tasks: ['preprocess', 'concat:client', 'uglify:client']
+        tasks: ['concat:client', 'uglify:client']
       },
       clientCss: {
         files: ['client/css/**/*.less'],
@@ -279,13 +263,12 @@ module.exports = function (grunt) {
   grunt.option('force', true);
 
   // Default task(s).
-  grunt.registerTask('default', ['clean:build', 'humans_txt', 'preprocess', 'less:dev', 'concat', 'uglify']);
+  grunt.registerTask('default', ['clean:build', 'humans_txt', 'less:dev', 'concat', 'uglify']);
 
   // Makes a release.
   grunt.registerTask('release', [
     'clean:build',
     'humans_txt',
-    'preprocess',
     'less:prod',
     'concat',
     'uglify',

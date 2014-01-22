@@ -1,6 +1,9 @@
 # AngularJS and Node.js good practices
 
 [![Build Status](https://travis-ci.org/ToastShaman/angularjs-nodejs-app.png?branch=master)](https://travis-ci.org/ToastShaman/angularjs-nodejs-app)
+[![Build Status](https://david-dm.org/Toastshaman/angularjs-nodejs-app.png)](https://david-dm.org/Toastshaman/angularjs-nodejs-app.png)
+
+https://david-dm.org/Toastshaman/angularjs-nodejs-app.png
 
 This project should serve as a reference for writing web application on top of Node.js and Angular.js.
 
