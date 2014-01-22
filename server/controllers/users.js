@@ -15,7 +15,7 @@ module.exports = function (app) {
 
     user1.save();
 
-    res.json({success: true});
+    res.json(user1);
 
   });
 

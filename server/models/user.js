@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose'),
   bcrypt = require('bcrypt'),
+  Q = require('q'),
   nconf = require('nconf');
 
 var userModel = function () {
@@ -30,21 +31,27 @@ var userModel = function () {
 
     var DIFFICULTY = (nconf.get('bcrypt') && nconf.get('bcrypt').difficulty) || 8;
 
-    var hashedPwd = bcrypt.hash(user.password, DIFFICULTY, function(err, res) {
-
-      user.password = hashedPwd;
-
+    bcrypt.hash(user.password, DIFFICULTY, function(err, res) {
+      user.password = res;
       next();
+
     });
 
   });
 
+  /**
+   * Check whether the given plaintext password matches the currently hashed password.
+   * @param plainText password
+   * @returns {Promise|Boolean} true if the password matches
+   */
   userSchema.methods.passwordMatches = function (plainText, cb) {
-    var user = this;
-    return bcrypt.compare(plainText, user.password, function(err, res) {
-      if (err) { return cb(err); }
-      cb();
-    });
+    bcrypt.compare(plainText, this.password, cb);
+  };
+
+  if (!userSchema.options.toObject) userSchema.options.toObject = {};
+  userSchema.options.toObject.transform = function (doc, ret, options) {
+    // remove the password of every document before returning the result
+    delete ret.password;
   };
 
   return mongoose.model('User', userSchema);

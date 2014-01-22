@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
   helmet = require('helmet'),
   express = require('express'),
   passport = require('passport'),
-  auth = require('../lib/auth'),
+  auth = require('../lib/passport-local-strategy'),
   nconf = require('nconf');
 
 var createApp = function () {
@@ -20,6 +20,8 @@ var createApp = function () {
   app.use(express.urlencoded());
 
   app.use(express.favicon("public/favicon.ico"));
+
+  app.use(passport.initialize({session: false}));
 
   passport.use(auth.localStrategy());
 
@@ -41,8 +43,6 @@ var createApp = function () {
   }
 
   app.all('/api/*', helmet.cacheControl());
-
-  app.use(passport.initialize());
 
   return app;
 }
