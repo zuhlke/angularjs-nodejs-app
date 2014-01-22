@@ -3,9 +3,7 @@
 var express = require('express'),
   fs = require('fs'),
   path = require('path'),
-  passport = require('passport'),
-  helmet = require('helmet'),
-  auth = require('./server/lib/auth'),
+  glob = require("glob"),
   nconf = require('nconf');
 
 //
@@ -30,40 +28,17 @@ var redis = require('./server/lib/redis');
 //
 // Create and configure the express app
 //
-var app = express();
-app.disable('x-powered-by');
-app.use(express.cookieParser());
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.favicon("public/favicon.ico"));
-passport.use(auth.localStrategy());
-if (process.env.NODE_ENV === 'development') {
-  app.use(express.compress());
-  app.use(express.static('public', {
-    maxAge : 86400000 // one day
-  }));
-  app.use(helmet.xframe());
-  app.use(helmet.iexss());
-  app.use(helmet.contentTypeOptions());
-  app.use(express.logger('dev'));
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-}
-app.all('/api/*', helmet.cacheControl());
-
-//
-// Request handlers before we configure the routes
-//
-app.use(passport.initialize());
-
-//server.use(auth.injectUser);
+var app = require('./server/config/express');
 
 //
 // Add our controllers
 //
-require('./server/controllers/users')(app);
-require('./server/controllers/admin')(app);
-require('./server/controllers/authenticate')(app);
-require('./server/controllers/index')(app);
+glob.sync('./server/controllers/*.js', function(err, files) {
+  files.forEach(function(file) {
+    console.log('Loading ' + file);
+    require(file)(app);
+  });
+});
 
 app.listen(nconf.get('port'));
 

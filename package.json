@@ -36,7 +36,8 @@
     "then-redis": "~0.3.9",
     "log4js": "~0.6.9",
     "nconf": "~0.6.9",
-    "bcrypt": "~0.7.7"
+    "bcrypt": "~0.7.7",
+    "glob": "~3.2.8"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

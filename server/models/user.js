@@ -19,9 +19,6 @@ var userModel = function () {
     role: String
   });
 
-  /**
-   * Helper function that hooks into the 'save' method, and replaces plaintext passwords with a hashed version.
-   */
   userSchema.pre('save', function (next) {
     var user = this;
 
