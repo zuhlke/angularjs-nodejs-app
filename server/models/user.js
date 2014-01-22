@@ -8,11 +8,21 @@ var mongoose = require('mongoose'),
 var userModel = function () {
 
   var userSchema = mongoose.Schema({
-    name: String,
+    name: {
+      type: String,
+      required: '{PATH} is required!',
+      trim: true
+    },
 
     username: {
       type: String,
-      unique: true
+      unique: true,
+      required: '{PATH} is required!',
+      trim: true
+    },
+
+    created: {
+      type: Date, default: Date.now
     },
 
     linkHref: String,

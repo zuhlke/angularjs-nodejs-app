@@ -3,10 +3,14 @@
 
   "mongodb": "mongodb://localhost/myApp-dev",
 
+  "mongoSafe" : true,
+
+  "mongooseDebug": true,
+
   "port" : 8000,
 
   "bcrypt": {
-    "difficulty": 8
+    "difficulty": 9
   },
 
   "cookieStore": {

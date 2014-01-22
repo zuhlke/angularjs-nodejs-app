@@ -195,10 +195,10 @@ module.exports = function (grunt) {
       xunit: {
         src: ['test/mocha/unit/**/*Spec.js'],
         options: {
-          require: 'coverage/blanket',
+          require: ['server.js', 'test/mocha/mocha.conf.js'],
           reporter: 'xunit',
-          quiet: true,
-          captureFile: 'target/mocha/test-reports.xml'
+          captureFile: './target/mocha/test-reports.xml',
+          quiet: true
         }
       },
       // Run this task with the 'grunt mochaTest:coverage' command.
@@ -206,9 +206,19 @@ module.exports = function (grunt) {
       coverage: {
         src: ['test/mocha/unit/**/*Spec.js'],
         options: {
+          require: ['server.js', 'test/mocha/mocha.conf.js'],
           reporter: 'mocha-cobertura-reporter',
-          quiet: true,
-          captureFile: 'target/mocha/coverage.xml'
+          captureFile: './target/mocha/coverage.xml',
+          quiet: true
+        }
+      },
+      coverageHtml: {
+        src: ['test/mocha/unit/**/*Spec.js'],
+        options: {
+          reporter: 'html-cov',
+          require: ['server.js', 'test/mocha/mocha.conf.js'],
+          captureFile: './target/mocha/cov.html',
+          quiet: true
         }
       }
     },
@@ -259,6 +269,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-env');
 
+  grunt.file.mkdir('target/mocha');
+  grunt.file.mkdir('target/karma');
+
   // Making grunt default to force in order not to break the project.
   grunt.option('force', true);
 
@@ -280,7 +293,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', ['env:test', 'mochaTest:spec', 'karma:unit']);
 
   // Test task for use in Jenkins.
-  grunt.registerTask('jenkins', ['env:test', 'mochaTest:xunit', 'mochaTest:coverage', 'karma:unit']);
+  grunt.registerTask('jenkins', ['env:test', 'mochaTest:xunit', 'mochaTest:coverage', 'mochaTest:coverageHtml', 'karma:unit']);
 
   // Test task for use in Travis.
   grunt.registerTask('travis', ['env:test', 'default', 'test']);
