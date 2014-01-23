@@ -9,11 +9,14 @@ VirtualBox Guest additions are up to date.
 
 Install the plugins by running the following command:
 
-
 ```
 # vagrant plugin install vagrant-omnibus
+```
+
+```
 # vagrant plugin install vagrant-vbguest
 ```
+
 ### Adding more Chef dependencies
 
 If you'll need to add more chef recipes use the following command:
