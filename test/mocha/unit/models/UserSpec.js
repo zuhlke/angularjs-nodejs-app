@@ -8,9 +8,9 @@ var User = require(__dirname + '/../../../../server/models/user');
 // Global
 var user;
 
-describe('A User object', function() {
+describe('A User object', function () {
 
-  beforeEach(function() {
+  beforeEach(function () {
     user = new User({
       name: 'Jane',
       username: 'admin@test.com',
@@ -19,37 +19,41 @@ describe('A User object', function() {
     });
   });
 
-  beforeEach(function(done) {
-    mongoose.connection.collections.users.remove(function(err) {
+  beforeEach(function (done) {
+    mongoose.connection.collections.users.remove(function (err) {
       done();
     });
   });
 
-  afterEach(function(done) {
-    mongoose.connection.collections.users.remove(function(err) {
+  afterEach(function (done) {
+    mongoose.connection.collections.users.remove(function (err) {
       done();
     });
   });
 
-  describe('save()', function() {
+  describe('when saving', function () {
 
-    it('should hash the plaintext password before saving', function(done) {
-      user.save(function(err, user) {
-        if (err) { return done(err); }
+    it('should hash the plaintext password before saving', function (done) {
+      user.save(function (err, user) {
+        if (err) {
+          return done(err);
+        }
         user.password.should.be.a('string').and.have.lengthOf(60);
         done();
       });
     })
 
-    it('should save a linkHref attribute linking the user to itself', function(done) {
-      user.save(function(err, user) {
-        if (err) { return done(err); }
+    it('should save a linkHref attribute, linking the user to itself', function (done) {
+      user.save(function (err, user) {
+        if (err) {
+          return done(err);
+        }
         user.linkHref.should.be.a('string').and.equal('admin@test.com');
         done();
       });
     });
 
-    it('should fail inserting a second user with the same username', function(done) {
+    it('should fail inserting a second user with the same username', function (done) {
       var user2 = new User({
         name: 'John',
         username: 'admin@test.com',
@@ -57,8 +61,8 @@ describe('A User object', function() {
         role: 'admin'
       });
 
-      user.save(function(err, user1) {
-        user2.save(function(err, user2) {
+      user.save(function (err, user1) {
+        user2.save(function (err, user2) {
           if (err) {
             return done();
           }
@@ -66,6 +70,33 @@ describe('A User object', function() {
         });
       });
 
+    });
+  });
+
+  describe('when comparing passwords', function () {
+
+    it('should match a a previously stored hash', function (done) {
+      user.save(function (err, user) {
+        if (err) {
+          return done(err);
+        }
+        user.passwordMatches('passowrd', done);
+      });
+    });
+
+  });
+
+  describe('when transforming', function () {
+
+    it('should not include the password field', function (done) {
+      user.save(function (err, user) {
+        if (err) {
+          return done(err);
+        }
+
+        user.toObject().should.not.have.property('password');
+        done();
+      });
     });
 
   });

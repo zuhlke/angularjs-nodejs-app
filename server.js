@@ -31,28 +31,23 @@ var app = require('./server/config/express');
 // Add our controllers
 //
 glob.sync('./server/controllers/*.js').forEach(function(file) {
-  console.log('Loading ' + file);
+  util.log('Loading ' + file);
   require(file)(app);
 });
 
+//
 // Display all the configured routes
-console.log();
-/*
-__.keys(app.routes).forEach(function(method) {
-  var method = method.toUpperCase()
-  app.routes[method].forEach(function(route) {
-    console.log(route);
-    //util.log(route.method.toUpperCase().green, route.path);
-  });
-});
-*/
-for(var type in app.routes) {
-  for(var rts in app.routes[type]) {
-    var route = app.routes[type][rts];
-    console.log(route.method.toUpperCase().green, route.path);
+//
+if (nconf.get('NODE_ENV') === 'development') {
+  console.log();
+  for(var type in app.routes) {
+    for(var rts in app.routes[type]) {
+      var route = app.routes[type][rts];
+      console.log(route.method.toUpperCase().green, route.path);
+    }
   }
+  console.log();
 }
-console.log();
 
 //
 // Printing some environment variables
