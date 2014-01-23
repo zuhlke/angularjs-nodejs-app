@@ -21,18 +21,21 @@ exports.localStrategy = function () {
 
 };
 
-exports.isAuthenticated = function (role) {
-
+/**
+ * A helper method to determine if a user has been authenticated, and if they have the right role.
+ * If the user is not known, redirect to the login page. If the role doesn't match, show a 403 page.
+ * @param role The role that a user should have to pass authentication.
+ */
+exports.ensureAuthenticated = function (role) {
   return function (req, res, next) {
 
     if (!req.isAuthenticated()) {
-      res.status(401);
+      res.send(401);
       return;
     }
 
-    //If a role was specified, make sure that the user has it.
     if (role && req.user.role !== role) {
-      res.status(401);
+      res.send(401);
       return;
     }
 
@@ -40,6 +43,12 @@ exports.isAuthenticated = function (role) {
   };
 };
 
+/**
+ * A helper method to add the user to the response context so we don't have to manually do it.
+ * @param req
+ * @param res
+ * @param next
+ */
 exports.injectUser = function (req, res, next) {
   if (req.isAuthenticated()) {
     res.locals.user = req.user;
