@@ -10,6 +10,10 @@ angular.module('myApp.services').factory('userService', function(loadingService,
       return baseUsers.withHttpConfig({
         tracker: loadingService.getTrackerId()
       }).getList();
+    },
+
+    checkUsername: function(username) {
+      return baseUsers.get({q: username});
     }
 
   }
