@@ -1,9 +1,16 @@
 'use strict';
 
+require("mocha-as-promised")();
+var chai = require('chai'),
+  should = chai.use(require('chai-as-promised')).should(),
+  expect = chai.expect,
+  Assertion = chai.Assertion,
+  userHelper = require('../../helpers/user.js');
+
+chai.use(userHelper);
+
 var mongoose = require('mongoose');
 var User = require(__dirname + '/../../../../server/models/user');
-
-//var User = mongoose.model('User');
 
 // Global
 var user;
@@ -29,6 +36,19 @@ describe('A User object', function () {
     mongoose.connection.collections.users.remove(function (err) {
       done();
     });
+  });
+
+  describe('when creating', function () {
+
+    it('should create a new object based on the UserSchema', function(done) {
+      user.save(function (err, user) {
+        if (err) {
+          return done(err);
+        }
+        user.should.be.a.userModel;
+        done();
+      });
+    })
   });
 
   describe('when saving', function () {
