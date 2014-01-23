@@ -5,6 +5,9 @@ var express = require('express'),
   path = require('path'),
   glob = require("glob"),
   pjson = require('./package.json'),
+  util = require('util'),
+  __ = require('underscore'),
+  ccolors = require('ccolors'),
   nconf = require('nconf');
 
 //
@@ -13,12 +16,6 @@ var express = require('express'),
 var configPath = 'server/config/config-' + process.env.NODE_ENV + '.json';
 nconf.argv().env().file({ file: configPath });
 nconf.set('version', pjson.version);
-//
-// Printing some environment variables
-//
-console.log('Version: ' + nconf.get('version'));
-console.log('ENV: ' + nconf.get('NODE_ENV'));
-console.log('MongoDB: ' + nconf.get('mongodb'));
 
 //
 // Bootstrap the database connections
@@ -33,13 +30,39 @@ var app = require('./server/config/express');
 //
 // Add our controllers
 //
-glob.sync('./server/controllers/*.js', function(err, files) {
-  files.forEach(function(file) {
-    console.log('Loading ' + file);
-    require(file)(app);
+glob.sync('./server/controllers/*.js').forEach(function(file) {
+  console.log('Loading ' + file);
+  require(file)(app);
+});
+
+// Display all the configured routes
+console.log();
+/*
+__.keys(app.routes).forEach(function(method) {
+  var method = method.toUpperCase()
+  app.routes[method].forEach(function(route) {
+    console.log(route);
+    //util.log(route.method.toUpperCase().green, route.path);
   });
 });
+*/
+for(var type in app.routes) {
+  for(var rts in app.routes[type]) {
+    var route = app.routes[type][rts];
+    console.log(route.method.toUpperCase().green, route.path);
+  }
+}
+console.log();
+
+//
+// Printing some environment variables
+//
+console.log();
+util.log('Version: ' + nconf.get('version'));
+util.log('ENV: ' + nconf.get('NODE_ENV'));
+util.log('MongoDB: ' + nconf.get('mongodb'));
+console.log();
 
 app.listen(nconf.get('port'));
 
-console.log('Listening on: ' + nconf.get('port'));
+util.log('Listening on: ' + nconf.get('port'));

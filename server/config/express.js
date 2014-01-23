@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
   nconf = require('nconf'),
   User = require('../models/user'),
   exphbs  = require('express3-handlebars'),
+  toobusy = require('toobusy'),
   MongoStore = require('connect-mongo')(express);
 
 var createApp = function () {
@@ -45,6 +46,14 @@ var createApp = function () {
     User.findOne({_id: id}, function (err, user) {
       done(null, user);
     });
+  });
+
+  app.use(function(req, res, next) {
+    if (toobusy()) {
+      res.send(503, "I'm busy right now, sorry.");
+    } else {
+      next();
+    }
   });
 
   app.set('views', './server/views');
