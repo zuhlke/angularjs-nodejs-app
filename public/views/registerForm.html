@@ -12,7 +12,10 @@
         </div>
       </div>
 
-      <input type="text" name="username" class="form-control input-lg" placeholder="Your Username" ng-model="register.username" maxlength="20" ng-maxlength="20" ng-pattern="/^[a-zA-Z0-9]+$/" ensure-unique-username required>
+      <input type="text" name="username" class="form-control input-lg" placeholder="Your Username" ng-model="register.username" maxlength="20" ng-minlength="5" ng-maxlength="20" ng-pattern="/^[a-zA-Z0-9]+$/" ensure-unique-username required>
+
+      <p ng-show="register_form.username.$error.minlength" class="help-block">Username is too short.</p>
+      <p ng-show="register_form.username.$error.maxlength" class="help-block">Username is too long.</p>
 
       <input type="email" name="email" class="form-control input-lg" placeholder="Your Email" ng-model="register.email" ensure-unique-email required>
 
