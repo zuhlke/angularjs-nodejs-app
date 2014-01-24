@@ -11,6 +11,8 @@ var mongoose = require('mongoose'),
   toobusy = require('toobusy'),
   MongoStore = require('connect-mongo')(express);
 
+require('express-namespace');
+
 var createApp = function () {
 
   var app = express();

@@ -8,16 +8,39 @@ var mongoose = require('mongoose'),
 var userModel = function () {
 
   var userSchema = mongoose.Schema({
-    name: {
+
+    first_name: {
       type: String,
-      required: '{PATH} is required!',
+      required: true,
       trim: true
+    },
+
+    last_name: {
+      type: String,
+      required: true,
+      trim: true
+    },
+
+    email: {
+      type: String,
+      index: true,
+      required: true,
+      trim: true,
+      lowercase: true
     },
 
     username: {
       type: String,
       unique: true,
-      required: '{PATH} is required!',
+      required: true,
+      trim: true,
+      lowercase: true
+    },
+
+    username_orig: {
+      type: String,
+      index: true,
+      required: true,
       trim: true
     },
 
@@ -25,7 +48,7 @@ var userModel = function () {
       type: Date, default: Date.now
     },
 
-    linkHref: String,
+    link_href: String,
 
     password: String,
 
@@ -51,7 +74,8 @@ var userModel = function () {
 
   userSchema.pre('save', function (next) {
     var user = this;
-    user.linkHref = user.username;
+    username_orig = user.username;
+    link_href = user.username.toLowerCase();
     next();
   });
 

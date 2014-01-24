@@ -12,8 +12,12 @@ angular.module('myApp.services').factory('userService', function(loadingService,
       }).getList();
     },
 
-    checkUsername: function(username) {
-      return baseUsers.get({q: username});
+    uniqueUsername: function(username) {
+      return baseUsers.one(username).head();
+    },
+
+    uniqueEmail: function(email) {
+      return baseUsers.head({email: email});
     }
 
   }

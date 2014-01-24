@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.directives').directive('ensureUniqueUsername', function($timeout, userService) {
+angular.module('myApp.directives').directive('ensureUniqueEmail', function($timeout, userService) {
   return {
     require: 'ngModel',
     link: function(originalScope, element, attrs, modelCtrl) {
@@ -18,7 +18,7 @@ angular.module('myApp.directives').directive('ensureUniqueUsername', function($t
       modelCtrl.$parsers.unshift(function (inputValue) {
         var newValue = inputValue;
         timeoutPromise = $timeout(function () {
-          userService.uniqueUsername(newValue).then(function() {
+          userService.uniqueEmail(newValue).then(function() {
             modelCtrl.$setValidity('unique', false);
           }, function() {
             modelCtrl.$setValidity('unique', true);
@@ -26,7 +26,7 @@ angular.module('myApp.directives').directive('ensureUniqueUsername', function($t
         }, waitTime);
         return inputValue;
       });
-
+      
     }
   }
 });
