@@ -27,7 +27,8 @@
     "angulartics": "~0.8.7",
     "angular-promise-tracker": "~1.5.1",
     "angular-bootstrap": "~0.10.0",
-    "momentjs": "~2.5.1"
+    "momentjs": "~2.5.1",
+    "github-buttons": "~0.0.4"
   },
   "devDependencies": {
     "angular-mocks": "=1.2.9"

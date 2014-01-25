@@ -1,26 +1,22 @@
-<div class="row vertical-offset-100">
-  <div class="col-md-4 col-md-offset-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Please sign in</h3>
-      </div>
-      <div class="panel-body">
-        <form name="login_form" novalidate accept-charset="UTF-8" role="form">
-          <fieldset>
-            <div class="form-group">
-              <input class="form-control" placeholder="Email Address" id="username" name="username" type="email" ng-model="login.username" autofocus required>
-            </div>
-            <div class="form-group">
-              <input class="form-control" placeholder="Password" id="password" name="password" type="password" ng-model="login.password" required>
-            </div>
-            <div class="form-group">
-              <input class="btn btn-lg btn-success btn-block" type="submit" value="Login" ng-click="submitLogin()" ng-disabled="login_form.$invalid">
-              <a ng-href="#register" class="btn btn-lg btn-block btn-primary" role="button">Register</a>
-            </div>
-            <div class="alert alert-danger" ng-show="formErrors.extra">{{formErrors.extra}}</div>
-          </fieldset>
-        </form>
-      </div>
-    </div>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 login-box">
+    <form name="register_form" novalidate accept-charset="UTF-8" class="form" role="form">
+      <legend>Please sign in</legend>
+      <fieldset>
+        <div class="form-group">
+          <input type="text" name="username" class="form-control input-lg" placeholder="Username or Email" ng-model="login.username" required>
+        </div>
+        <div class="form-group">
+          <input class="form-control input-lg" placeholder="Password" id="password" name="password" type="password" ng-model="login.password" required>
+        </div>
+        <div class="form-group">
+          <input class="btn btn-lg btn-success btn-block" type="submit" value="Login" ng-click="submitLogin()" ng-disabled="login_form.$invalid">
+          <a ng-href="#register" class="btn btn-lg btn-block btn-primary" role="button">Register</a>
+        </div>
+        <div class="form-group">
+          <div class="alert alert-danger" ng-show="formErrors.extra">{{formErrors.extra}}</div>
+        </div>
+      </fieldset>
+    </form>
   </div>
 </div>

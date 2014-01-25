@@ -13,8 +13,16 @@
     "difficulty": 9
   },
 
+  "socketIoStore": {
+    "host": "localhost",
+    "port": "6379"
+  },
+
   "cookieStore": {
-    "url": "mongodb://localhost/myApp-test/sessions",
+    "host": "localhost",
+    "port": "6379",
+    "db": "sessions",
+    "url": "mongodb://localhost/myApp-dev/sessions",
     "secret": "Jah3ooth4jah4miemieB"
   }
 

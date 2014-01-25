@@ -3,11 +3,21 @@
 @loginBackgroundPinLayer1: url('../img/pinlayer1.png');
 @loginBackgroundPinLayer2: url('../img/pinlayer2.png');
 
+.login-box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #eee;
+}
+
 .loginBackground {
-  position: absolute;
   width: 100%;
-  top: 20%; /* Header Height */
-  bottom: 20%; /* Footer Height */
+  padding-top: 40px;
+  padding-bottom: 40px;
   background-color: @loginBackgroundColor;
   background: @loginBackgroundPinLayer2, @loginBackgroundPinLayer1, @loginBackgroundUrl;
+}
+
+.spacer {
+  margin-top: 40px;
 }

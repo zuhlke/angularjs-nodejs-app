@@ -9,7 +9,8 @@ var mongoose = require('mongoose'),
   User = require('../models/user'),
   exphbs  = require('express3-handlebars'),
   toobusy = require('toobusy'),
-  MongoStore = require('connect-mongo')(express);
+  socketio = require('./socketio'),
+  RedisStore = require('connect-redis')(express);
 
 require('express-namespace');
 
@@ -29,8 +30,10 @@ var createApp = function () {
 
   app.use(express.session({
     secret: nconf.get('cookieStore').secret,
-    store: new MongoStore(nconf.get('cookieStore'))
+    store: new RedisStore(nconf.get('cookieStore'))
   }));
+
+  socketio(app);
 
   app.use(passport.initialize());
 

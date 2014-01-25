@@ -1,6 +1,7 @@
 
-@validInputColor: green;
-@invalidInputColor: red;
+@backgroundColor: #eee;
+@validInputColor: #3c763d;
+@invalidInputColor: #a94442;
 
 // Shows a red border around input fields when they're dirty and invalid
 input.ng-dirty.ng-invalid {
@@ -9,14 +10,11 @@ input.ng-dirty.ng-invalid {
 
 // Shows a green border around input fields when they're dirty and invalid
 input.ng-dirty.ng-valid {
-    border: 1px solid @validInputColor;
+  border: 1px solid @validInputColor;
 }
 
-// Centers the div on the screen
-.center-block {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.control-label.has-error {
+  color: @invalidInputColor;
 }
 
 // http://angular-ui.github.io/bootstrap/
@@ -28,3 +26,15 @@ input.ng-dirty.ng-valid {
 .nav, .pagination, .carousel, .panel-title a {
   cursor: pointer;
 }
+
+// Style for the <legend> in the registrationForm and loginForm
+legend {
+  color: #141823;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+html, body {
+  background-color: @backgroundColor;
+}
+

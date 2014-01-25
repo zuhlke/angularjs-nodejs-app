@@ -18,11 +18,11 @@ angular.module('myApp.directives').directive('loginForm', function() {
       var loginBackgroundClassName = 'loginBackground';
 
       function setLoginBackground() {
-        $('body').addClass(loginBackgroundClassName);
+        //$('body').addClass(loginBackgroundClassName);
       }
 
       function removeLoginBackground() {
-        $('body').removeClass(loginBackgroundClassName);
+        //$('body').removeClass(loginBackgroundClassName);
       }
 
       function addMouseMove() {
@@ -40,7 +40,7 @@ angular.module('myApp.directives').directive('loginForm', function() {
           + parseInt(e.pageY/15) + "px, "
           + parseInt(e.pageX/30) + "px "
           + parseInt(e.pageY/30) + "px";
-        $('body').css('background-position', newPosition);
+        $('.loginBackground').css('background-position', newPosition);
       }
 
       function cleanup() {
