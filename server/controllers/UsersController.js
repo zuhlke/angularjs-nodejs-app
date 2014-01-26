@@ -1,11 +1,31 @@
 'use strict'
 
+var log = require('../lib/logger').getLogger();
 var User = require('../models/user');
 
 module.exports = function (app) {
 
   app.namespace('/api/v1/users', function() {
 
+    /**
+     * Creates a new user.
+     * @returns 200 with a user, 400 otherwise.
+     */
+    app.post('/', function(req, res) {
+      var user = new User(req.body);
+      user.save(function(err, user) {
+        if (err) {
+          log.error(err);
+          return res.send(400);
+        }
+        res.json(user.toObject());
+      });
+    });
+
+    /**
+     * A method for verifying if the given username already exists.
+     * @returns 200 if the username exists, 404 otherwise
+     */
     app.head('/:username', function (req, res) {
       var username = req.params.username;
       var query = {
@@ -22,6 +42,10 @@ module.exports = function (app) {
       });
     });
 
+    /**
+     * A method for verifying if the given email already exists.
+     * @returns 200 if the email exists, 404 otherwise
+     */
     app.head('/', function (req, res) {
       var query = User.find({});
 

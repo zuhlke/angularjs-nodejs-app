@@ -5,6 +5,7 @@ angular.module('myApp', [
     'restangular',
     'angulartics',
     'angulartics.google.analytics',
+    'ui.utils',
     'ngRoute',
     'myApp.services',
     'myApp.filters',
@@ -27,16 +28,21 @@ angular.module('myApp', [
 
 }).config(function($analyticsProvider) {
 
-    // turn off virtual page tracking
+    //Turn off virtual page tracking
     $analyticsProvider.virtualPageviews(false);
 
 }).config(function(RestangularProvider) {
 
-    // set's the base path for all API calls to '/api/v1'
+    //Set's the base path for all API calls to '/api/v1'
     RestangularProvider.setBaseUrl('/api/v1');
     RestangularProvider.setRestangularFields({
       selfLink: 'link_href' // the attribute in our documents to link to themselves
     });
+
+}).config(function($logProvider){
+
+    //Enable debug messages
+    $logProvider.debugEnabled(true);
 
 });
 

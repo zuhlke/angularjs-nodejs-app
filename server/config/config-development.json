@@ -9,6 +9,8 @@
 
   "port" : 8000,
 
+  "logFile" : "myApp.log",
+
   "bcrypt": {
     "difficulty": 9
   },

@@ -1,17 +1,17 @@
 'use strict';
 
-angular.module('myApp.services').factory('authenticationService', function(Restangular, loadingService) {
-
-  var baseAuth = Restangular.all('authenticate');
+angular.module('myApp.services').factory('authenticationService', function($log, Restangular, loadingService) {
 
   return {
 
     authenticate: function(user) {
-
-      return baseAuth.withHttpConfig({
+      return Restangular.all('authenticate').withHttpConfig({
         tracker: loadingService.getTrackerId()
       }).post(user);
+    },
 
+    createUser: function(user) {
+      return Restangular.all('users').post(user);
     }
 
   }

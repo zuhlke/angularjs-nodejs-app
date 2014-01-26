@@ -1,9 +1,5 @@
 'use strict';
 
-// A directive applying DOM modifications in the link function using jQuery.
-// Makes the pin moves on the LoginForm background.
-
-// Also contains our view model.
 angular.module('myApp.directives').directive('registerForm', function() {
   return {
     restrict: 'E',
@@ -12,8 +8,6 @@ angular.module('myApp.directives').directive('registerForm', function() {
     scope: {
       onSubmit: '&',
       formErrors: '='
-    },
-    compile: function(scope) {
     },
     link: function(scope) {
 

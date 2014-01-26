@@ -33,14 +33,12 @@ var userModel = function () {
       type: String,
       unique: true,
       required: true,
-      trim: true,
-      lowercase: true
+      trim: true
     },
 
     username_orig: {
       type: String,
       index: true,
-      required: true,
       trim: true
     },
 
@@ -74,8 +72,9 @@ var userModel = function () {
 
   userSchema.pre('save', function (next) {
     var user = this;
-    username_orig = user.username;
-    link_href = user.username.toLowerCase();
+    user.username_orig = user.username;
+    user.link_href = user.username.toLowerCase();
+    user.username = user.username.toLowerCase();
     next();
   });
 

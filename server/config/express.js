@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
   User = require('../models/user'),
   exphbs  = require('express3-handlebars'),
   toobusy = require('toobusy'),
+  log4js = require('../lib/logger'),
   socketio = require('./socketio'),
   RedisStore = require('connect-redis')(express);
 
@@ -77,10 +78,12 @@ var createApp = function () {
     app.use(helmet.iexss());
     app.use(helmet.contentTypeOptions());
 
-    app.use(express.logger('dev'));
-
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
   }
+
+  app.configure(function() {
+    app.use(log4js.connectLogger(log4js.getLogger(), { level: 'auto', format: ':method :url' }));
+  });
 
   app.all('/api/*', helmet.cacheControl());
 

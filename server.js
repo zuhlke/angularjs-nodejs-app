@@ -56,6 +56,7 @@ console.log();
 util.log('Version: ' + nconf.get('version'));
 util.log('ENV: ' + nconf.get('NODE_ENV'));
 util.log('MongoDB: ' + nconf.get('mongodb'));
+util.log('Redis: ' + nconf.get('socketIoStore').host + ':' + nconf.get('socketIoStore').port);
 console.log();
 
 app.listen(nconf.get('port'));

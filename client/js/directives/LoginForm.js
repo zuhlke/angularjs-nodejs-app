@@ -17,14 +17,6 @@ angular.module('myApp.directives').directive('loginForm', function() {
 
       var loginBackgroundClassName = 'loginBackground';
 
-      function setLoginBackground() {
-        //$('body').addClass(loginBackgroundClassName);
-      }
-
-      function removeLoginBackground() {
-        //$('body').removeClass(loginBackgroundClassName);
-      }
-
       function addMouseMove() {
         $('body').mousemove(transitionBackground);
       }
@@ -43,19 +35,13 @@ angular.module('myApp.directives').directive('loginForm', function() {
         $('.loginBackground').css('background-position', newPosition);
       }
 
-      function cleanup() {
-        removeLoginBackground();
-        removeMouseMove();
-      }
-
-      setLoginBackground();
       addMouseMove();
 
       scope.submitLogin = function() {
         scope.onSubmit({user: scope.login});
       };
 
-      scope.$on('$destroy', cleanup);
+      scope.$on('$destroy', removeMouseMove);
 
     }
   }
