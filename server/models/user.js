@@ -7,6 +7,8 @@ var mongoose = require('mongoose'),
 
 var userModel = function () {
 
+  var roles = 'ADMIN USER'.split(' ')
+
   var userSchema = mongoose.Schema({
 
     first_name: {
@@ -50,7 +52,10 @@ var userModel = function () {
 
     password: String,
 
-    role: String
+    role: {
+      type: String,
+      enum: roles
+    }
   });
 
   userSchema.pre('save', function (next) {
@@ -87,10 +92,21 @@ var userModel = function () {
     bcrypt.compare(plainText, this.password, cb);
   };
 
+  /**
+   * Allows you to set the user's role.
+   * @param {String} role
+   * @returns {User}
+   */
+  userSchema.methods.setRole = function (role) {
+    this.role = role;
+    return this;
+  }
+
   if (!userSchema.options.toObject) userSchema.options.toObject = {};
   userSchema.options.toObject.transform = function (doc, ret, options) {
     // remove the password of every document before returning the result
     delete ret.password;
+    delete ret._id;
   };
 
   return mongoose.model('User', userSchema);

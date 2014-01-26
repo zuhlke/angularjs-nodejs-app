@@ -13,12 +13,21 @@ module.exports = function (app) {
      */
     app.post('/', function(req, res) {
       var user = new User(req.body);
-      user.save(function(err, user) {
+      user.setRole('USER').save(function(err, user) {
         if (err) {
           log.error(err);
           return res.send(400);
         }
-        res.json(user.toObject());
+
+        //We've successfully created a new user, now log him in
+        req.login(user, function(err) {
+          if (err) {
+            log.error(err);
+            return res.send(400);
+          }
+          res.json(req.user.toObject());
+        });
+
       });
     });
 

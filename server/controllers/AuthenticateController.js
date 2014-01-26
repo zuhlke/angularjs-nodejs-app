@@ -16,7 +16,7 @@ module.exports = function (app) {
           return next({error: 'User does not exist'});
         }
 
-        req.logIn(user, function(err) {
+        req.login(user, function(err) {
           if (err) { return res.send({error: err.message}); }
           return res.json(user);
         });
