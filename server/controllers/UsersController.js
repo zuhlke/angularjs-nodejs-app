@@ -8,30 +8,6 @@ module.exports = function (app) {
   app.namespace('/api/v1/users', function() {
 
     /**
-     * Creates a new user.
-     * @returns 200 with a user, 400 otherwise.
-     */
-    app.post('/', function(req, res) {
-      var user = new User(req.body);
-      user.setRole('USER').save(function(err, user) {
-        if (err) {
-          log.error(err);
-          return res.send(400);
-        }
-
-        //We've successfully created a new user, now log him in
-        req.login(user, function(err) {
-          if (err) {
-            log.error(err);
-            return res.send(400);
-          }
-          res.json(req.user.toObject());
-        });
-
-      });
-    });
-
-    /**
      * A method for verifying if the given username already exists.
      * @returns 200 if the username exists, 404 otherwise
      */

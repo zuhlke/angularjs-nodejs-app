@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('myApp.services').factory('authenticationService', function($log, Restangular, loadingService) {
+angular.module('myApp.services').factory('authenticationService', function($log, $cookieStore, Restangular, loadingService) {
+
+  var _user = $cookieStore.get('user');
 
   return {
 
@@ -11,9 +13,8 @@ angular.module('myApp.services').factory('authenticationService', function($log,
     },
 
     createUser: function(user) {
-      return Restangular.all('users').post(user);
+      return Restangular.all('register').post(user);
     }
-
   }
 
 });
