@@ -1,7 +1,7 @@
 'use strict'
 
-var log = require('../lib/logger').getLogger();
-var User = require('../models/user');
+var log = require('../lib/logger').getLogger(),
+  User = require('../models/user');
 
 module.exports = function (app) {
 

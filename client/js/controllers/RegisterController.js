@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('myApp.controllers').controller('RegisterController', function($scope, $location, authenticationService) {
+angular.module('myApp.controllers').controller('RegisterController', function($scope, $location, userService) {
 
   $scope.errors = {};
 
-  var createUser = function(user) {
-    authenticationService.createUser(user).then(function() {
+  var register = function(user) {
+    userService.register(user).then(function() {
       $location.path('/dashboard');
     }, function(resp) {
       $scope.errors.extra = 'There was an error creating the user';
@@ -13,6 +13,6 @@ angular.module('myApp.controllers').controller('RegisterController', function($s
 
   };
 
-  $scope.createUser = createUser;
+  $scope.register = register;
 
 });

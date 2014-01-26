@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.services').factory('Auth', function($cookieStore) {
+angular.module('myApp.services').factory('Auth', function($cookieStore, ACCESS_LEVELS) {
 
   var _user = $cookieStore.get('user');
 
@@ -24,7 +24,7 @@ angular.module('myApp.services').factory('Auth', function($cookieStore) {
     },
 
     isAuthorized: function(lvl) {
-      return _user.role >= lvl;
+      return this.isLoggedIn() && _user.access_level >= lvl;
     },
 
     isLoggedIn: function() {

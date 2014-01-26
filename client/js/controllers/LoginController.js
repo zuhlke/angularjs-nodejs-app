@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('myApp.controllers').controller('LoginController', function($scope, $log, authenticationService) {
+angular.module('myApp.controllers').controller('LoginController', function($scope, $log, userService) {
 
   $scope.errors = {};
 
-  var sendLogin = function(user) {
-    authenticationService.authenticate(user).then(function() {
+  var login = function(user) {
+    userService.login(user).then(function() {
       $log.debug('User authenticated successfully');
     }, function(resp) {
       $log.debug('There was an error authenticating the user');
@@ -13,6 +13,6 @@ angular.module('myApp.controllers').controller('LoginController', function($scop
     });
   };
 
-  $scope.sendLogin = sendLogin;
+  $scope.login = login;
 
 });

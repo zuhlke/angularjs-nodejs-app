@@ -1,7 +1,8 @@
 'use strict'
 
 var passport = require('passport'),
-  log = require('../lib/logger').getLogger();
+  log = require('../lib/logger').getLogger(),
+  User = require('../models/user');
 
 module.exports = function (app) {
 

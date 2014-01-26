@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.services').factory('userService', function(loadingService, Restangular) {
+angular.module('myApp.services').factory('userService', function(loadingService, Auth, Restangular) {
 
   var baseUsers = Restangular.all('users');
 
@@ -18,6 +18,16 @@ angular.module('myApp.services').factory('userService', function(loadingService,
 
     uniqueEmail: function(email) {
       return baseUsers.head({email: email});
+    },
+
+    login: function(user) {
+      return Restangular.all('login').withHttpConfig({
+        tracker: loadingService.getTrackerId()
+      }).post(user);
+    },
+
+    register: function(user) {
+      return Restangular.all('register').post(user);
     }
 
   }
