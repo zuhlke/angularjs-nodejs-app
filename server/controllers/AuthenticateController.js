@@ -38,7 +38,9 @@ module.exports = function (app) {
         }
 
         req.login(user, function(err) {
-          if (err) { return res.send({error: err.message}); }
+          if (err) {
+            return res.send({error: err.message});
+          }
           return res.json(user);
         });
 

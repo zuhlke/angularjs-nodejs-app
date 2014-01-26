@@ -1,18 +1,28 @@
-var express = require('express.io'),
-  redis = require('redis'),
-  RedisStore = express.io.RedisStore,
+'use strict';
+
+var redis = require('redis'),
   nconf = require('nconf');
 
 module.exports = function (app) {
 
-  app = express().http().io();
+  var io = require('socket.io').listen(app.listen(nconf.get('port')));
 
-  var config = nconf.get('socketIoStore');
+  var RedisStore = require('socket.io/lib/stores/redis');
+  var pub = redis.createClient();
+  var sub = redis.createClient();
+  var store = redis.createClient();
 
-  app.io.set('store', new express.io.RedisStore({
-    redisPub: redis.createClient(config.port, config.host),
-    redisSub: redis.createClient(config.port, config.host),
-    redisClient: redis.createClient(config.port, config.host)
+  io.set('store', new RedisStore({
+    redisPub: pub,
+    redisSub: sub,
+    redisClient: store
   }));
+
+  io.enable('browser client minification');
+  io.enable('browser client etag');
+  io.enable('browser client gzip');
+  io.set('log level', 1);
+
+  io.set('transports', ['websocket', 'xhr-polling']);
 
 };

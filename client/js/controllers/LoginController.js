@@ -1,14 +1,13 @@
 'use strict';
 
-angular.module('myApp.controllers').controller('LoginController', function($scope, $log, userService) {
+angular.module('myApp.controllers').controller('LoginController', function($scope, $location, userService) {
 
   $scope.errors = {};
 
   var login = function(user) {
     userService.login(user).then(function() {
-      $log.debug('User authenticated successfully');
+      $location.path('/dashboard');
     }, function(resp) {
-      $log.debug('There was an error authenticating the user');
       $scope.errors.extra = 'Invalid username or password';
     });
   };

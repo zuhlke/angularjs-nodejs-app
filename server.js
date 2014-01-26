@@ -59,6 +59,4 @@ util.log('MongoDB: ' + nconf.get('mongodb'));
 util.log('Redis: ' + nconf.get('socketIoStore').host + ':' + nconf.get('socketIoStore').port);
 console.log();
 
-app.listen(nconf.get('port'));
-
 util.log('Listening on: ' + nconf.get('port'));
