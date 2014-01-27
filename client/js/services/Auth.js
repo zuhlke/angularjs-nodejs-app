@@ -39,6 +39,10 @@ angular.module('myApp.services').factory('Auth', function($cookieStore, ACCESS_L
       return _user ? _user.username : null;
     },
 
+    getUsername: function() {
+      return _user ? _user.username_orig : null;
+    },
+
     logout: function() {
       $cookieStore.remove('user');
       _user = null;

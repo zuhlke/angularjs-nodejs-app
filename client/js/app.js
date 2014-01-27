@@ -6,6 +6,7 @@ angular.module('myApp', [
     'angulartics',
     'angulartics.google.analytics',
     'ui.utils',
+    'ui.bootstrap',
     'ngRoute',
     'ngCookies',
     'myApp.services',
@@ -121,5 +122,5 @@ angular.module('myApp', [
 
 angular.module('myApp.services', [ 'ajoslin.promise-tracker', 'restangular' ]);
 angular.module('myApp.directives', []);
-angular.module('myApp.controllers', [ 'angulartics.google.analytics' ]);
+angular.module('myApp.controllers', [ 'angulartics.google.analytics', 'ui.bootstrap' ]);
 angular.module('myApp.filters', []);
