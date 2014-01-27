@@ -14,6 +14,7 @@ var express = require('express'),
 // Load the configuration file
 //
 var configPath = 'server/config/config-' + process.env.NODE_ENV + '.json';
+nconf.defaults(require('./server/config/config-defaults.json'));
 nconf.argv().env().file({ file: configPath });
 nconf.set('version', pjson.version);
 

@@ -30,20 +30,20 @@ var createApp = function () {
   app.engine('handlebars', exphbs({defaultLayout: 'main'}));
   app.set('view engine', 'handlebars');
 
-  if (nconf.get('NODE_ENV') === 'development') {
+  app.use('/vendor', express.static(__dirname + '/../../public/vendor', {maxAge: 86400000}));
+  app.use('/img', express.static(__dirname + '/../../public/img', {maxAge: 86400000}));
+  app.use('/css', express.static(__dirname + '/../../public/css', {maxAge: 1200000}));
+  app.use('/js', express.static(__dirname + '/../../public/js', {maxAge: 1200000}));
+  app.use('/lib', express.static(__dirname + '/../../public/lib', {maxAge: 1200000}));
+  app.use('/template', express.static(__dirname + '/../../public/template', {maxAge: 1200000}));
+  app.use('/views', express.static(__dirname + '../../public/views', {maxAge: 1200000}));
+  app.use(express.static(__dirname + '/../../public', {maxAge: 86400000}));
 
-    app.use(express.compress());
+  app.use(helmet.xframe());
+  app.use(helmet.iexss());
+  app.use(helmet.contentTypeOptions());
 
-    app.use(express.static('public', {
-      maxAge: 86400000 // one day
-    }));
-
-    app.use(helmet.xframe());
-    app.use(helmet.iexss());
-    app.use(helmet.contentTypeOptions());
-
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-  }
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 
   require('./passport')(app);
 
