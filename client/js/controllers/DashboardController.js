@@ -20,22 +20,36 @@ angular.module('myApp.controllers').controller('DashboardController', function($
         latitude: 45,
         longitude: -73
       },
-      zoom: 14
+      zoom: 13
     },
-    markers: []
-  });
+    markers: [
+      // London
+      { latitude: 51.5205513, longitude: -0.1354548, showWindow: false, icon: 'img/zuhlke.png' },
 
-  $timeout(function () {
-    var markers = [ {
-        latitude: 51.5205047,
-        longitude: -0.1355364,
-        showWindow: false
-      }
-    ];
-    $scope.$apply(function() {
-      $log.info('Setting markers');
-      $scope.markers = markers;
-    });
-  }, 5000);
+      // Switzerland, Zurich
+      { latitude: 47.4000411, longitude: 8.4434826, showWindow: false, icon: 'img/zuhlke.png' },
+
+      // Switzerland, Bern
+      { latitude: 46.94945, longitude: 7.44276, showWindow: false, icon: 'img/zuhlke.png' },
+
+      // Austria
+      { latitude: 48.242196, longitude: 16.384821, showWindow: false, icon: 'img/zuhlke.png' },
+
+      // Germany, Frankfurt
+      { latitude: 50.13076, longitude: 8.57092, showWindow: false, icon: 'img/zuhlke.png' },
+
+      // Germany, Hamburg
+      { latitude: 53.54274, longitude: 9.98800, showWindow: false, icon: 'img/zuhlke.png' },
+
+      // Germany, Hannover
+      { latitude: 52.39846, longitude: 9.77092, showWindow: false, icon: 'img/zuhlke.png' },
+
+      // Germany, Munich
+      { latitude: 48.14838, longitude: 11.53701, showWindow: false, icon: 'img/zuhlke.png' },
+
+      // Belgrade
+      { latitude: 44.81274, longitude: 20.41467, showWindow: false, icon: 'img/zuhlke.png' }
+    ]
+  });
 
 });
