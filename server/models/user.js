@@ -2,7 +2,6 @@
 
 var mongoose = require('mongoose'),
   bcrypt = require('bcrypt'),
-  Q = require('q'),
   nconf = require('nconf');
 
 var userModel = function () {
@@ -82,6 +81,16 @@ var userModel = function () {
     user.username = user.username.toLowerCase();
     next();
   });
+
+  /**
+   * Returns an array of users with matching username or email address.
+   * @param username or email address
+   * @returns {Promise|Array}
+   */
+  userSchema.statics.findByUsernameOrEmail = function (username) {
+    var query = { $or: [{username: username.toLowerCase()}, {email: username.toLowerCase()}] };
+    return this.find(query).exec();
+  }
 
   /**
    * Check whether the given plaintext password matches the currently hashed password.

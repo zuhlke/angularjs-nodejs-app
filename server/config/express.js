@@ -45,6 +45,12 @@ var createApp = function () {
 
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 
+  app.use(express.session({
+    secret: nconf.get('cookieStore').secret,
+    store: new RedisStore(nconf.get('cookieStore')),
+    cookie: { maxAge: 3600000 }
+  }));
+
   require('./passport')(app);
 
   app.configure(function() {
@@ -52,11 +58,6 @@ var createApp = function () {
   });
 
   app.all('/api/*', helmet.cacheControl());
-
-  app.use(express.session({
-    secret: nconf.get('cookieStore').secret,
-    store: new RedisStore(nconf.get('cookieStore'))
-  }));
 
   require('./toobusy')(app);
 

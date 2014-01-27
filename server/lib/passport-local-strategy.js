@@ -1,20 +1,19 @@
 'use strict';
 
 var User = require('../models/user'),
-  log = require('../lib/logger').getLogger(),
-  LocalStrategy = require('passport-local').Strategy,
-  Q = require('q');
+  LocalStrategy = require('passport-local').Strategy;
 
 exports.localStrategy = function () {
 
   return new LocalStrategy(function (username, password, done) {
-    var query = { $or: [{username: username.toLowerCase()}, {email: username.toLowerCase()}] };
-    User.find(query).exec().then(function(users) {
+
+    User.findByUsernameOrEmail(username).then(function(users) {
       if (!users || users.length > 1) {
         return done(user);
       }
 
       var user = users[0];
+
       user.passwordMatches(password, function(err, matches) {
         if (err) {
           return done(user);
@@ -31,6 +30,7 @@ exports.localStrategy = function () {
         return done(err);
       }
     });
+
   });
 
 };

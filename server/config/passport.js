@@ -1,8 +1,10 @@
 'use strict'
 
 var mongoose = require('mongoose'),
+  util = require('util'),
   passport = require('passport'),
   auth = require('../lib/passport-local-strategy'),
+  redis = require('../lib/redis'),
   User = require('../models/user');
 
 module.exports = function (app) {
