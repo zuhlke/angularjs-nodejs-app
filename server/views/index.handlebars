@@ -26,6 +26,8 @@
   <script src="vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
   <script src="vendor/angular-ui-utils/ui-utils.min.js"></script>
   <script src="vendor/momentjs/min/moment.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script src='vendor/angular-google-maps/dist/angular-google-maps.min.js'></script>
 
   <script src="/socket.io/socket.io.js"></script>
 
@@ -36,7 +38,7 @@
 </head>
 <body>
 
-  <div ng-view></div>
+  <div class="view" ng-view></div>
 
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
   <script>

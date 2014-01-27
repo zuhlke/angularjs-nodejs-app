@@ -14,7 +14,9 @@ angular.module('myApp.controllers').controller('HeaderDropdownController', funct
   };
 
   $scope.username = Auth.getUsername();
+
   $scope.items = [ {cmd: 'LOGOUT', text: 'Logout'} ];
+
   $scope.menuClick = menuClick;
 
 });

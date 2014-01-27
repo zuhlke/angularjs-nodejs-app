@@ -7,6 +7,7 @@ angular.module('myApp', [
     'angulartics.google.analytics',
     'ui.utils',
     'ui.bootstrap',
+    'google-maps',
     'ngRoute',
     'ngCookies',
     'myApp.services',
@@ -34,7 +35,7 @@ angular.module('myApp', [
       .when('/dashboard', {
         templateUrl: 'views/dashboard.html',
         controller: 'DashboardController',
-        accessLevel: ACCESS_LEVELS.user
+        accessLevel: ACCESS_LEVELS.pub
       })
       .when('/admin', {
         templateUrl: 'views/admin.html',
@@ -122,5 +123,5 @@ angular.module('myApp', [
 
 angular.module('myApp.services', [ 'ajoslin.promise-tracker', 'restangular' ]);
 angular.module('myApp.directives', []);
-angular.module('myApp.controllers', [ 'angulartics.google.analytics', 'ui.bootstrap' ]);
+angular.module('myApp.controllers', [ 'angulartics.google.analytics', 'ui.bootstrap', 'google-maps' ]);
 angular.module('myApp.filters', []);
