@@ -39,16 +39,14 @@ glob.sync('./server/controllers/*.js').forEach(function(file) {
 //
 // Display all the configured routes
 //
-if (nconf.get('NODE_ENV') === 'development') {
-  console.log();
-  for(var type in app.routes) {
-    for(var rts in app.routes[type]) {
-      var route = app.routes[type][rts];
-      console.log(route.method.toUpperCase().green, route.path);
-    }
+console.log();
+for(var type in app.routes) {
+  for(var rts in app.routes[type]) {
+    var route = app.routes[type][rts];
+    console.log(route.method.toUpperCase().green, route.path);
   }
-  console.log();
 }
+console.log();
 
 //
 // Printing some environment variables
