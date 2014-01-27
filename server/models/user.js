@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 
 var userModel = function () {
 
-  var roles = 'ADMIN USER'.split(' ')
+  var roles = 'ADMIN USER'.split(' ');
 
   var userSchema = mongoose.Schema({
 

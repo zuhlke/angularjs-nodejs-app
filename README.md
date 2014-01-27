@@ -37,6 +37,10 @@ Clone the repository
 and run
 
 ```
+# npm install -g bower grunt grunt-cli
+```
+
+```
 # npm install
 ```
 
