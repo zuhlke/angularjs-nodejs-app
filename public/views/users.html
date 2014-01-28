@@ -1,0 +1,80 @@
+<header/>
+
+<div class="container" ng-controller="UserListController">
+
+  <pagination on-select-page="setPage(page)" boundary-links="true" total-items="totalItems" page="currentPage" items-per-page="itemsPerPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+
+  <div class="well col-md-12">
+
+      <div ng-repeat="user in users" ng-controller="UserListItemController">
+
+        <div class="row user-row">
+          <div class="col-md-1">
+            <img class="img-circle" src="img/user50.png" alt="User Pic">
+          </div>
+          <div class="col-md-10">
+            <strong>{{user.username_orig}}</strong><br>
+            <span class="text-muted">{{user.email}}</span>
+          </div>
+          <div class="col-md-1 dropdown-user">
+            <i class="glyphicon glyphicon-chevron-down text-muted" ng-click="isCollapsed = !isCollapsed"></i>
+          </div>
+        </div>
+
+        <div class="row user-infos" collapse="!isCollapsed">
+          <div class="col-sm-10 col-md-10 col-md-offset-1">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">User information</h3>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-3">
+                    <img class="img-circle" src="img/user100.png" alt="User Pic">
+                  </div>
+                  <div class="col-md-6">
+                    <strong>{{user.username_orig}}</strong><br>
+                    <table class="table table-condensed table-responsive table-user-information">
+                      <tbody>
+                      <tr>
+                        <td>User level:</td>
+                        <td>{{user.role}}</td>
+                      </tr>
+                      <tr>
+                        <td>Registered since:</td>
+                        <td>{{user.created|date:medium}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-footer">
+                <button class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" data-original-title="Send message to user">
+                  <i class="glyphicon glyphicon-envelope"></i></button>
+              <span class="pull-right">
+                <button class="btn btn-sm btn-warning" type="button" data-toggle="tooltip" data-original-title="Edit this user">
+                  <i class="glyphicon glyphicon-edit"></i></button>
+                <button class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" data-original-title="Remove this user">
+                  <i class="glyphicon glyphicon-remove"></i></button></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<footer/>

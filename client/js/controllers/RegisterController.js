@@ -4,7 +4,7 @@ angular.module('myApp.controllers').controller('RegisterController', function($s
 
   $scope.errors = {};
 
-  var register = function(user) {
+  $scope.register = function(user) {
     userService.register(user).then(function() {
       $location.path('/dashboard');
     }, function(resp) {
@@ -12,7 +12,5 @@ angular.module('myApp.controllers').controller('RegisterController', function($s
     });
 
   };
-
-  $scope.register = register;
 
 });

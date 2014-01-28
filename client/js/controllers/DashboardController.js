@@ -22,6 +22,7 @@ angular.module('myApp.controllers').controller('DashboardController', function($
       },
       zoom: 13
     },
+    pubs: [],
     markers: [
       // London
       { latitude: 51.5205513, longitude: -0.1354548, showWindow: false, icon: 'img/zuhlke.png' },

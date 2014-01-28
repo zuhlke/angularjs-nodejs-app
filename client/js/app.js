@@ -19,7 +19,9 @@ angular.module('myApp', [
   user: 2,
   admin: 3
 })
-.config(function($routeProvider, ACCESS_LEVELS) {
+.config(function($routeProvider, $locationProvider, ACCESS_LEVELS) {
+
+    //$locationProvider.html5Mode(true).hashPrefix('!');
 
     $routeProvider
       .when('/', {
@@ -36,6 +38,11 @@ angular.module('myApp', [
         templateUrl: 'views/dashboard.html',
         controller: 'DashboardController',
         accessLevel: ACCESS_LEVELS.pub
+      })
+      .when('/users', {
+        templateUrl: 'views/users.html',
+        controller: 'UserListController',
+        accessLevel: ACCESS_LEVELS.user
       })
       .when('/admin', {
         templateUrl: 'views/admin.html',
@@ -105,18 +112,12 @@ angular.module('myApp', [
 
   $rootScope.$on('$routeChangeStart', function(evt, next, curr) {
 
-    if (next.accessLevel === ACCESS_LEVELS.pub) {
-      return;
-    }
-
-    if (!Auth.isAuthorized(next.accessLevel)) {
-      if (Auth.isLoggedIn()) {
-        //The user is logged in, but does not have permissions to view the view
-        $location.path('/');
-      } else {
+    if (!(next.accessLevel === ACCESS_LEVELS.pub)) {
+      if (!Auth.isAuthorized(next.accessLevel)) {
         $location.path('/');
       }
     }
+
   });
 
 });
