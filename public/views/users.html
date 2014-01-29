@@ -73,8 +73,8 @@
                   <i class="glyphicon glyphicon-envelope"></i>
                 </button>
                 <span class="pull-right">
-                  <button class="btn btn-sm btn-warning" type="button" data-toggle="tooltip" data-original-title="Edit this user">
-                    <a ng-href="#/users/{{user.link_href}}"><i class="glyphicon glyphicon-edit"></i></a>
+                  <button ng-click="editUser()" class="btn btn-sm btn-warning" type="button" data-toggle="tooltip" data-original-title="Edit this user">
+                    <i class="glyphicon glyphicon-edit"></i>
                   </button>
                   <button ng-click="open()" class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" data-original-title="Remove this user">
                     <i class="glyphicon glyphicon-remove"></i>

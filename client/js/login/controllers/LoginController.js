@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.controllers').controller('LoginController', function($scope, $location, userService) {
+angular.module('myApp.login').controller('LoginController', function($scope, $location, userService) {
 
   $scope.errors = {};
 

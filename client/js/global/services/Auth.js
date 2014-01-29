@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.services').factory('Auth', function($cookieStore, ACCESS_LEVELS) {
+angular.module('myApp.global').factory('Auth', function($cookieStore, ACCESS_LEVELS) {
 
   var _user = $cookieStore.get('user');
 

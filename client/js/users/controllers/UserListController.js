@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.controllers').controller('UserListController', function($scope, $location, userSearchService) {
+angular.module('myApp.users').controller('UserListController', function($scope, $location, userSearchService) {
 
   $scope.setPage = function (pageNo) {
     var query = $location.search();

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.services').factory('loadingService', function(promiseTracker) {
+angular.module('myApp.global').factory('loadingService', function(promiseTracker) {
 
   var trackerId = 'loadingTracker';
   var loadingTracker = promiseTracker(trackerId);

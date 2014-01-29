@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.controllers').controller('DashboardController', function($scope, $timeout, $log) {
+angular.module('myApp.dashboard').controller('DashboardController', function($scope, $timeout, $log) {
 
   // Enable the new Google Maps visuals until it gets enabled by default.
   // See http://googlegeodevelopers.blogspot.ca/2013/05/a-fresh-new-look-for-maps-api-for-all.html

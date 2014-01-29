@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.directives').directive('registerForm', function() {
+angular.module('myApp.register').directive('registerForm', function() {
   return {
     restrict: 'E',
     replace: true,

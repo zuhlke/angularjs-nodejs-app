@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.controllers').controller('UserListItemController', function($scope, $modal, userService) {
+angular.module('myApp.users').controller('UserListItemController', function($scope, $modal, $location, userService) {
 
   $scope.isCollapsed = false;
 
@@ -20,12 +20,15 @@ angular.module('myApp.controllers').controller('UserListItemController', functio
     }, function () {
       //User cancelled the operation
     });
+  };
 
+  $scope.editUser = function() {
+    $location.path('/users/' + $scope.user.username_orig);
   }
 
 });
 
-angular.module('myApp.controllers').controller('RemoveUserModalInstanceController', function($scope, $modalInstance, user, $log) {
+angular.module('myApp.users').controller('RemoveUserModalInstanceController', function($scope, $modalInstance, user, $log) {
 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');

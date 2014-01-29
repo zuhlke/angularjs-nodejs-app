@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.services').factory('userSearchService', function($q, $location, Restangular) {
+angular.module('myApp.users').factory('userSearchService', function($q, $location, Restangular) {
 
   var totalItems = 0;
 

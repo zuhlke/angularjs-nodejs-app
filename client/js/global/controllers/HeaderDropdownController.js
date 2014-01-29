@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.controllers').controller('HeaderDropdownController', function($scope, $location, Auth) {
+angular.module('myApp.global').controller('HeaderDropdownController', function($scope, $location, Auth) {
 
   $scope.username = Auth.getUsername();
 

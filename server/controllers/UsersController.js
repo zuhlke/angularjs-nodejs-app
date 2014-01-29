@@ -60,7 +60,26 @@ module.exports = function (app) {
         }
         res.send(200);
       }).then(null, function (err) {
-          return res.send(404);
+        return res.send(404);
+      });
+    });
+
+    /**
+     * Returns the given user.
+     */
+    app.get('/:username', function (req, res) {
+      var username = req.params.username;
+      var query = {
+        username : username.toLowerCase()
+      };
+
+      User.findOne(query).exec().then(function(user) {
+        if (!user) {
+          throw Error();
+        }
+        res.json(user.toObject());
+      }).then(null, function (err) {
+        return res.send(404);
       });
     });
 

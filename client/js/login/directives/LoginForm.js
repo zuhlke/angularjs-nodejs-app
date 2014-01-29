@@ -4,7 +4,7 @@
 // Makes the pin moves on the LoginForm background.
 
 // Also contains our view model.
-angular.module('myApp.directives').directive('loginForm', function() {
+angular.module('myApp.login').directive('loginForm', function() {
   return {
     restrict: 'E',
     replace: true,

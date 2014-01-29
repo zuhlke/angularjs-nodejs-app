@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.directives').directive('ensureUniqueEmail', function($timeout, userService) {
+angular.module('myApp.global').directive('ensureUniqueEmail', function($timeout, userService) {
   return {
     require: 'ngModel',
     link: function(originalScope, element, attrs, modelCtrl) {

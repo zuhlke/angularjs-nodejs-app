@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.directives').directive('header', function(Auth) {
+angular.module('myApp.global').directive('header', function(Auth) {
   return {
     restrict: 'E',
     replace: true,

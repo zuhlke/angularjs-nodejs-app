@@ -1,19 +1,23 @@
 'use strict';
 
+angular.module('myApp.global', ['ajoslin.promise-tracker', 'restangular']);
+angular.module('myApp.dashboard', ['ajoslin.promise-tracker', 'restangular', 'google-maps']);
+angular.module('myApp.login', ['ajoslin.promise-tracker', 'restangular']);
+angular.module('myApp.register', ['ajoslin.promise-tracker', 'restangular']);
+angular.module('myApp.userDetails', ['ajoslin.promise-tracker', 'restangular']);
+angular.module('myApp.users', ['ajoslin.promise-tracker', 'restangular', 'ui.bootstrap']);
+
 angular.module('myApp', [
-    'ajoslin.promise-tracker',
-    'restangular',
     'angulartics',
     'angulartics.google.analytics',
-    'ui.utils',
-    'ui.bootstrap',
-    'google-maps',
     'ngRoute',
     'ngCookies',
-    'myApp.services',
-    'myApp.filters',
-    'myApp.directives',
-    'myApp.controllers'
+    'myApp.global',
+    'myApp.dashboard',
+    'myApp.login',
+    'myApp.register',
+    'myApp.userDetails',
+    'myApp.users'
 ]).constant('ACCESS_LEVELS', {
   pub: 1,
   user: 2,
@@ -42,6 +46,11 @@ angular.module('myApp', [
       .when('/users', {
         templateUrl: 'views/users.html',
         controller: 'UserListController',
+        accessLevel: ACCESS_LEVELS.user
+      })
+      .when('/users/:username', {
+        templateUrl: 'views/userDetails.html',
+        controller: 'UserDetailController',
         accessLevel: ACCESS_LEVELS.user
       })
       .when('/admin', {
@@ -135,8 +144,3 @@ angular.module('myApp', [
   });
 
 });
-
-angular.module('myApp.services', [ 'ajoslin.promise-tracker', 'restangular' ]);
-angular.module('myApp.directives', []);
-angular.module('myApp.controllers', [ 'angulartics.google.analytics', 'ui.bootstrap', 'google-maps' ]);
-angular.module('myApp.filters', []);

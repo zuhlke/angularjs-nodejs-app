@@ -5,7 +5,7 @@
 // when loadingTracker.active() === true.
 //
 // Uses the angular-promise-tracker library
-angular.module('myApp.directives').directive('footer', function(loadingService) {
+angular.module('myApp.global').directive('footer', function(loadingService) {
   return {
     restrict: 'E',
     replace: true,

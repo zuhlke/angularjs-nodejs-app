@@ -1,7 +1,8 @@
 'use strict'
 
-angular.module('myApp.services').factory('socket', function ($rootScope) {
+angular.module('myApp.global').factory('socket', function ($rootScope) {
 
+  /*
   var _socket = io.connect();
 
   return {
@@ -27,5 +28,6 @@ angular.module('myApp.services').factory('socket', function ($rootScope) {
     }
 
   };
+  */
 
 });

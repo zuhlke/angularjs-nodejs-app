@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.controllers').controller('RegisterController', function($scope, $location, userService) {
+angular.module('myApp.register').controller('RegisterController', function($scope, $location, userService) {
 
   $scope.errors = {};
 
