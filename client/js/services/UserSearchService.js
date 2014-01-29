@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.services').factory('userSearchService', function($location, Restangular) {
+angular.module('myApp.services').factory('userSearchService', function($q, $location, Restangular) {
 
   var totalItems = 0;
 
@@ -13,18 +13,18 @@ angular.module('myApp.services').factory('userSearchService', function($location
   return {
 
     getUsers: function() {
+      var deferred = $q.defer();
+
       queryParameters = $location.search();
 
-      Restangular.setFullResponse(true);
-      Restangular.setResponseInterceptor(function (data, operation, what, url, response, deferred) {
-        if (url === '/api/v1/users') {
-          totalItems = response.headers()['total-items'];
-          start = response.headers()['start'];
-          items = response.headers()['items'];
-          return response.data;
-        }
+      Restangular.all('users').getList($location.search()).then(function(results) {
+        totalItems = results.metadata.total_items;
+        start = results.metadata.start;
+        items = results.metadata.items;
+        deferred.resolve(results);
       });
-      return Restangular.all('users').getList($location.search());
+
+      return deferred.promise;
     },
 
     getTotalItems: function() {

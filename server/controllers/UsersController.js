@@ -21,7 +21,7 @@ module.exports = function (app) {
 
       User.findUsersPaginated(start, items, req.query.q).then(function(users) {
 
-          results = users.map(function(d) { return d.toObject(); } );
+          results.data = users.map(function(d) { return d.toObject(); } );
 
         }).then(function() {
 
@@ -29,9 +29,11 @@ module.exports = function (app) {
 
         }).then(function(count) {
 
-          res.header('Total-Items', count);
-          res.header('Start', start);
-          res.header('Items', items);
+          results.metadata = {
+            start: start,
+            items: items,
+            total_items: count
+          };
 
           res.json(results);
 

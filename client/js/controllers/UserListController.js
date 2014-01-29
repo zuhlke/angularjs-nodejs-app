@@ -9,7 +9,7 @@ angular.module('myApp.controllers').controller('UserListController', function($s
   };
 
   userSearchService.getUsers().then(function(results) {
-    $scope.users = results.data;
+    $scope.users = results;
   }).then(function() {
     $scope.paginator = userSearchService.getPaginatorSettings();
   });
