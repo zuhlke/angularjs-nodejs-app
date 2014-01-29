@@ -28,6 +28,10 @@ angular.module('myApp.services').factory('userService', function(loadingService,
 
     register: function(user) {
       return Restangular.all('register').post(user);
+    },
+
+    remove: function(user) {
+      return user.remove();
     }
 
   }

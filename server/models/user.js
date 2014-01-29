@@ -77,7 +77,7 @@ var userModel = function () {
   userSchema.pre('save', function (next) {
     var user = this;
     user.username_orig = user.username;
-    user.link_href = user.username.toLowerCase();
+    user.link_href = nconf.get('linkHrefBase') + user.username.toLowerCase();
     user.username = user.username.toLowerCase();
     next();
   });

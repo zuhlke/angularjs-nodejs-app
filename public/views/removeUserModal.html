@@ -1,0 +1,13 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title"><i class="fa fa-exclamation-triangle"></i> Delete User!</h4>
+  </div>
+  <div class="modal-body">
+    Are you sure you want to delete <b>{{user.username}}</b>?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+    <button type="button" class="btn btn-danger" ng-click="ok()">Delete User</button>
+  </div>
+</div>
