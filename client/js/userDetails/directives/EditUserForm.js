@@ -11,7 +11,9 @@ angular.module('myApp.userDetails').directive('editUserForm', function($routePar
     },
     link: function(scope, element, attrs, modelCtrl) {
 
-      scope.user = userService.getUser($routeParams.username);
+      userService.getUser($routeParams.username).then(function(user) {
+        scope.user = user;
+      });
 
     }
   }
