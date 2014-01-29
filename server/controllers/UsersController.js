@@ -7,43 +7,6 @@ module.exports = function (app) {
 
   app.namespace('/api/v1/users', function() {
 
-    function getUsers (req, res) {
-      var query = {};
-
-      var searchByUsername = req.query.q;
-      var start = req.query.start || 0;
-      var items = req.query.items || 10;
-
-      if (searchByUsername) {
-        query.username = searchByUsername.toLowerCase();
-      }
-
-      User.find(query).limit(items).skip(start * items).sort({username: 'asc'}).exec(function (err, users) {
-          if (err) {
-            return res.send(500, {error: err});
-          }
-
-          User.count().exec(function (err, count) {
-            if (err) {
-              return res.send(500, {error: err});
-            }
-
-            var results = {};
-
-            results.users = users.map(function (d) {
-              return d.toObject();
-            });
-
-            results.start = start;
-            results.items = items;
-            results.totalItems = count;
-
-            res.json(results);
-
-          });
-        });
-    }
-
     /**
      * Simply returns a list of all the users in the system.
      * @params q the username to search for
@@ -51,7 +14,32 @@ module.exports = function (app) {
      * @params items the number of items to bring back
      */
     app.get('/', function (req, res) {
-      getUsers(req, res);
+      var results = {};
+
+      var start = req.query.start || 0;
+      var items = req.query.items || 10;
+
+      User.findUsersPaginated(start, items, req.query.q).then(function(users) {
+
+          results = users.map(function(d) { return d.toObject(); } );
+
+        }).then(function() {
+
+          return User.count().exec();
+
+        }).then(function(count) {
+
+          res.header('Total-Items', count);
+          res.header('Start', start);
+          res.header('Items', items);
+
+          res.json(results);
+
+        }).then(null, function(err) {
+
+          return res.send(500);
+
+        });
     });
 
     /**

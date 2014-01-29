@@ -2,7 +2,17 @@
 
 <div class="container" ng-controller="UserListController">
 
-  <pagination on-select-page="setPage(page)" boundary-links="true" total-items="totalItems" page="currentPage" items-per-page="itemsPerPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+  <pagination
+          on-select-page="setPage(page)"
+          boundary-links="true"
+          total-items="paginator.totalItems"
+          page="paginator.currentPage"
+          items-per-page="paginator.itemsPerPage"
+          class="pagination-sm"
+          previous-text="&lsaquo;"
+          next-text="&rsaquo;"
+          first-text="&laquo;"
+          last-text="&raquo;"></pagination>
 
   <div class="well col-md-12">
 
@@ -51,12 +61,16 @@
               </div>
               <div class="panel-footer">
                 <button class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" data-original-title="Send message to user">
-                  <i class="glyphicon glyphicon-envelope"></i></button>
-              <span class="pull-right">
-                <button class="btn btn-sm btn-warning" type="button" data-toggle="tooltip" data-original-title="Edit this user">
-                  <i class="glyphicon glyphicon-edit"></i></button>
-                <button class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" data-original-title="Remove this user">
-                  <i class="glyphicon glyphicon-remove"></i></button></span>
+                  <i class="glyphicon glyphicon-envelope"></i>
+                </button>
+                <span class="pull-right">
+                  <button class="btn btn-sm btn-warning" type="button" data-toggle="tooltip" data-original-title="Edit this user">
+                    <a ng-href="#/users/{{user.link_href}}"><i class="glyphicon glyphicon-edit"></i></a>
+                  </button>
+                  <button class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" data-original-title="Remove this user">
+                    <i class="glyphicon glyphicon-remove"></i>
+                  </button>
+                </span>
               </div>
             </div>
           </div>

@@ -90,7 +90,26 @@ var userModel = function () {
   userSchema.statics.findByUsernameOrEmail = function (username) {
     var query = { $or: [{username: username.toLowerCase()}, {email: username.toLowerCase()}] };
     return this.find(query).exec();
-  }
+  };
+
+  /**
+   * Returns a list of users (paginated).
+   * @params {int} [start] the current page
+   * @params {int} [items] the number of items to return
+   * @params {String} [username] the username to search for
+   * @returns {Promise|Array}
+   */
+  userSchema.statics.findUsersPaginated = function() {
+    var query = {};
+
+    var start = arguments[0] || 0;
+    var items = arguments[1] || 10;
+    if (arguments[2]) {
+      query.username = arguments[2].toLowerCase();
+    }
+
+    return this.find(query).limit(items).skip(start * items).sort({username: 'asc'}).exec();
+  };
 
   /**
    * Check whether the given plaintext password matches the currently hashed password.
