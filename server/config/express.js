@@ -61,6 +61,8 @@ var createApp = function () {
 
   require('./toobusy')(app);
 
+  require('./upload')(app);
+
   return app;
 }
 

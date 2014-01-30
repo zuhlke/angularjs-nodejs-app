@@ -3,6 +3,7 @@
 angular.module('myApp.global', []);
 angular.module('myApp.dashboard', ['google-maps']);
 angular.module('myApp.login', []);
+angular.module('myApp.upload', ['blueimp.fileupload']);
 angular.module('myApp.register', []);
 angular.module('myApp.userDetails', []);
 angular.module('myApp.users', []);
@@ -21,7 +22,8 @@ angular.module('myApp', [
     'myApp.login',
     'myApp.register',
     'myApp.userDetails',
-    'myApp.users'
+    'myApp.users',
+    'myApp.upload'
 ]).constant('ACCESS_LEVELS', {
   pub: 1,
   user: 2,
@@ -59,6 +61,11 @@ angular.module('myApp', [
         templateUrl: 'views/admin.html',
         controller: 'AdminController',
         accessLevel: ACCESS_LEVELS.admin
+      })
+      .when('/upload', {
+        templateUrl: 'views/upload.html',
+        controller: 'UploadController',
+        accessLevel: ACCESS_LEVELS.pub
       })
       .otherwise({
         redirectTo: '/'

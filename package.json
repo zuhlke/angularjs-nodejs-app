@@ -42,7 +42,8 @@
     "toobusy": "~0.2.4",
     "express-namespace": "~0.1.1",
     "connect-redis": "~1.4.6",
-    "redis": "~0.10.0"
+    "redis": "~0.10.0",
+    "jquery-file-upload-middleware": "~0.1.0"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

@@ -17,6 +17,8 @@
 
   "linkHrefBase": "/api/v1/",
 
+  "uploadDirectory" : "public/uploads/",
+
   "socketIoStore": {
     "host": "localhost",
     "port": "6379"
