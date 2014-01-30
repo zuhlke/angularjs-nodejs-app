@@ -3,7 +3,7 @@
 angular.module('myApp.global').directive('ensureUniqueUsername', function($timeout, userService) {
   return {
     require: 'ngModel',
-    link: function(originalScope, element, attrs, modelCtrl) {
+    link: function(scope, element, attrs, modelCtrl) {
 
       //Wait 500ms after the user finished typing to make the call
       var waitTime = 500;

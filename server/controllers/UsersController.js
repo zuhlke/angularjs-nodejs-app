@@ -84,6 +84,33 @@ module.exports = function (app) {
     });
 
     /**
+     * Updates a given user.
+     */
+    app.put('/:username', function (req, res) {
+      var updatedUser = req.body;
+
+      User.findOne({username: req.params.username.toLowerCase()}).exec().then(function(existingUser) {
+        existingUser.first_name = updatedUser.first_name;
+        existingUser.last_name = updatedUser.last_name;
+        if (updatedUser.password) {
+          existingUser.password = updatedUser.password;
+        }
+
+        existingUser.save(function(err, savedUser) {
+          if (err) {
+            return res.send(500);
+          }
+          res.json(savedUser.toObject());
+        });
+
+      }).then(null, function(err) {
+
+        return res.send(500);
+
+      });
+    });
+
+    /**
      * A method for verifying if the given email already exists.
      * @returns 200 if the email exists, 404 otherwise
      */

@@ -15,6 +15,10 @@ angular.module('myApp.userDetails').directive('editUserForm', function($routePar
         scope.user = user;
       });
 
+      scope.editAccount = function() {
+        scope.onSubmit({user: scope.user});
+      };
+
     }
   }
 });

@@ -10,6 +10,8 @@ module.exports = function (app) {
 
     app.post('/register', function(req, res) {
       var user = new User(req.body);
+      user.username_orig = user.username;
+      user.username = user.username.toLowerCase();
       user.setRole('USER').save(function(err, user) {
         if (err) {
           log.error(err);

@@ -38,6 +38,10 @@ angular.module('myApp.global').factory('userService', function(loadingService, A
 
     remove: function(user) {
       return user.remove();
+    },
+
+    update: function(user) {
+      return user.put();
     }
 
   }

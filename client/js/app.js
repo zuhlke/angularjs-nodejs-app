@@ -1,15 +1,19 @@
 'use strict';
 
-angular.module('myApp.global', ['ajoslin.promise-tracker', 'restangular']);
-angular.module('myApp.dashboard', ['ajoslin.promise-tracker', 'restangular', 'google-maps']);
-angular.module('myApp.login', ['ajoslin.promise-tracker', 'restangular']);
-angular.module('myApp.register', ['ajoslin.promise-tracker', 'restangular']);
-angular.module('myApp.userDetails', ['ajoslin.promise-tracker', 'restangular']);
-angular.module('myApp.users', ['ajoslin.promise-tracker', 'restangular', 'ui.bootstrap']);
+angular.module('myApp.global', []);
+angular.module('myApp.dashboard', ['google-maps']);
+angular.module('myApp.login', []);
+angular.module('myApp.register', []);
+angular.module('myApp.userDetails', []);
+angular.module('myApp.users', []);
 
 angular.module('myApp', [
+    'ui.bootstrap',
+    'ui.utils',
     'angulartics',
     'angulartics.google.analytics',
+    'ajoslin.promise-tracker',
+    'restangular',
     'ngRoute',
     'ngCookies',
     'myApp.global',
@@ -24,8 +28,6 @@ angular.module('myApp', [
   admin: 3
 })
 .config(function($routeProvider, $locationProvider, ACCESS_LEVELS) {
-
-    //$locationProvider.html5Mode(true).hashPrefix('!');
 
     $routeProvider
       .when('/', {
