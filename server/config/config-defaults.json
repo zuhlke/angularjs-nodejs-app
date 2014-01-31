@@ -29,6 +29,6 @@
     "port": "6379",
     "secret": "Jah3ooth4jah4miemieB",
     "ttl": "3600000"
-}
+  }
 
 }

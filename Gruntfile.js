@@ -187,7 +187,7 @@ module.exports = function (grunt) {
         src: ['test/mocha/unit/**/*Spec.js'],
         options: {
           reporter: 'spec',
-          require: ['server.js', 'test/mocha/mocha.conf.js']
+          require: ['test/mocha/mocha.conf.js']
         }
       },
       // Run this task with the 'grunt mochaTest:xunit' command.
@@ -235,9 +235,10 @@ module.exports = function (grunt) {
     // Runs our e2e tests with protractor
     mochaProtractor: {
       options: {
-        browsers: ['Chrome', 'Firefox'],
+        browsers: ['Chrome'],
         reporter: 'Spec',
-        baseUrl: 'http://localhost:3000'
+        baseUrl: 'http://localhost:8000',
+        slow: 3000
       },
       files: ['test/e2e/unit/**/*Spec.js']
     },
@@ -290,7 +291,7 @@ module.exports = function (grunt) {
     'compress']);
 
   // Test task for use in the command line.
-  grunt.registerTask('test', ['env:test', 'mochaTest:spec', 'karma:unit']);
+  grunt.registerTask('test', ['env:test', 'mochaTest:spec' /*'karma:unit'*/]);
 
   // Test task for use in Jenkins.
   grunt.registerTask('jenkins', ['env:test', 'mochaTest:xunit', 'mochaTest:coverage', 'mochaTest:coverageHtml', 'karma:unit']);

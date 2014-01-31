@@ -7,7 +7,6 @@ var express = require('express'),
   pjson = require('./package.json'),
   util = require('util'),
   __ = require('underscore'),
-  ccolors = require('ccolors'),
   nconf = require('nconf');
 
 //

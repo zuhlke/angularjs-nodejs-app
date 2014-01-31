@@ -4,7 +4,6 @@ require("mocha-as-promised")();
 var chai = require('chai'),
   should = chai.use(require('chai-as-promised')).should(),
   expect = chai.expect,
-  Assertion = chai.Assertion,
   userHelper = require('../../helpers/user.js');
 
 chai.use(userHelper);
