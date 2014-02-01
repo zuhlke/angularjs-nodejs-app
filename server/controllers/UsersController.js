@@ -87,7 +87,7 @@ module.exports = function (db) {
     /**
      * Updates a given user.
      */
-    updateUser: function () {
+    updateUser: function (req, res) {
       var updatedUser = req.body;
 
       db.User.findOne({username: req.params.username.toLowerCase()}).exec().then(function (existingUser) {
@@ -114,8 +114,8 @@ module.exports = function (db) {
      * A method for verifying if the given email already exists.
      * @returns 200 if the email exists, 404 otherwise
      */
-    emailExists: function () {
-      var query = this._find({});
+    emailExists: function (req, res) {
+      var query = db.User.find({});
 
       if (req.query.email) {
         var email = req.query.email.toLowerCase();
