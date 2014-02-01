@@ -1,5 +1,54 @@
 <header />
 
-<edit-user-form on-submit="submitUser(user)"></edit-user-form>
+<div class="container">
+
+  <div class="row spacer">
+
+    <div class="col-md-6 col-md-offset-3">
+
+      <form name="user_form" novalidate accept-charset="UTF-8" class="form" role="form">
+        <fieldset>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-6 col-md-6">
+                <input type="text" name="firstname" class="form-control input-lg" placeholder="First Name" ng-model="user.first_name" autofocus required>
+              </div>
+              <div class="col-xs-6 col-md-6">
+                <input type="text" name="lastname" class="form-control input-lg" placeholder="Last Name" ng-model="user.last_name" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" id="username" name="username" class="form-control input-lg" placeholder="Your Username" ng-model="user.username_orig" maxlength="20" ng-minlength="5" ng-maxlength="20" ng-pattern="/^[a-zA-Z0-9]+$/" ng-readonly="true" required>
+            <label ng-show="user_form.username.$error.minlength" class="control-label has-error" for="username">Username is too short.</label>
+            <label ng-show="user_form.username.$error.maxlength" class="control-label has-error" for="username">Username is too long.</label>
+            <label ng-show="user_form.username.$error.unique" class="control-label has-error" for="username">Username is already taken.</label>
+            <label ng-show="user_form.username.$error.pattern" class="control-label has-error" for="username">Username must consist of alphanumeric (a-zA-Z0-9) characters only.</label>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" name="email" class="form-control input-lg" placeholder="Your Email" ng-model="user.email" ng-readonly="true" required />
+            <label ng-show="user_form.email.$error.unique" class="control-label has-error" for="email">Email is already taken.</label>
+            <label ng-show="user_form.email.$error.email" class="control-label has-error" for="email">Email is not valid.</label>
+          </div>
+          <div class="form-group">
+            <input type="password" id="password" name="password" class="form-control input-lg" placeholder="Password" ngMinlength="8" ng-model="user.password" autocomplete="off" ng-required="user_form.password.$dirty">
+            <label ng-show="user_form.password.$error.minlength" class="control-label has-error" for="username">Password is too short.</label>
+            <label ng-show="user_form.password.$error.maxlength" class="control-label has-error" for="username">Password is too long.</label>
+          </div>
+          <div class="form-group">
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control input-lg" placeholder="Confirm Password" ng-model="user.confirm_password" ngMinlength="8" ui-validate="{ match : '$value==user.password' }" ui-validate-watch="'user.password'" autocomplete="off" ng-required="user_form.password.$dirty"/>
+            <label ng-show="user_form.confirm_password.$error.match" class="control-label has-error" for="confirm_password">Passwords do not match.</label>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="editAccount(user)" ng-disabled="user_form.$invalid">Update User</button>
+            <a ng-href="#/users" class="btn btn-lg btn-block btn-default" role="button">Cancel</a>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+  </div>
+
+</div>
 
 <footer />

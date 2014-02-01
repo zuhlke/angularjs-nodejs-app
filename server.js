@@ -3,7 +3,6 @@
 var express = require('express'),
   fs = require('fs'),
   path = require('path'),
-  glob = require("glob"),
   pjson = require('./package.json'),
   util = require('util'),
   __ = require('underscore'),
@@ -18,34 +17,40 @@ nconf.argv().env().file({ file: configPath });
 nconf.set('version', pjson.version);
 
 //
+// Instantiate the logger
+//
+var logger = require('./server/middleware/logger')(nconf);
+
+//
 // Bootstrap the database connections
 //
-var mongodb = require('./server/lib/mongodb');
+var mongodb = require('./server/middleware/mongodb')(nconf);
+
+//
+// Load domain model
+//
+var db = require('./server/models')(nconf);
 
 //
 // Create and configure the express app
 //
-var app = require('./server/config/express');
+var app = express();
+var passport = require('./server/config/express')(app, db, logger, nconf);
 
 //
-// Add our controllers
+// Add middleware
 //
-glob.sync('./server/controllers/*.js').forEach(function(file) {
-  util.log('Loading ' + file);
-  require(file)(app);
-});
+require('./server/middleware/upload')(app, logger, nconf);
 
 //
-// Display all the configured routes
+// Load our Controllers
 //
-console.log();
-for(var type in app.routes) {
-  for(var rts in app.routes[type]) {
-    var route = app.routes[type][rts];
-    console.log(route.method.toUpperCase().green, route.path);
-  }
-}
-console.log();
+var ctrl = require('./server/controllers')(db, passport, nconf);
+
+//
+// Configure routes
+//
+require('./server/middleware/routes')(app, ctrl);
 
 //
 // Printing some environment variables
@@ -58,3 +63,5 @@ util.log('Redis: ' + nconf.get('socketIoStore').host + ':' + nconf.get('socketIo
 console.log();
 
 util.log('Listening on: ' + nconf.get('port'));
+
+app.listen(nconf.get('port'));

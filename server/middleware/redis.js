@@ -1,14 +1,10 @@
 'use strict'
 
-var redis = require("redis"),
-  nconf = require('nconf');
+var redis = require("redis");
 
-function db() {
+module.exports = function (nconf) {
 
   var config = nconf.get('cookieStore');
-
   return redis.createClient(config.port, config.host);
 
-}
-
-module.exports = db();
+};

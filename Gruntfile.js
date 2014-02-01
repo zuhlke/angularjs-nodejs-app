@@ -151,34 +151,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Monitor for any changes in your node.js application and automatically restart the server - perfect for development
-    // https://github.com/remy/nodemon
-    nodemon: {
-      dev: {
-        options: {
-          file: 'server.js',
-          args: [],
-          ignoredFiles: ['public/**'],
-          watchedExtensions: ['js'],
-          nodeArgs: ['--debug'],
-          delayTime: 1,
-          env: {
-            PORT: 3000
-          },
-          cwd: __dirname
-        }
-      }
-    },
-
-    // Run grunt tasks concurrently
-    // https://github.com/sindresorhus/grunt-concurrent
-    concurrent: {
-      tasks: ['nodemon', 'watch'],
-      options: {
-        logConcurrentOutput: true
-      }
-    },
-
     // Runs our tests
     // https://github.com/pghalliday/grunt-mocha-test
     mochaTest: {
@@ -266,8 +238,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-mocha-protractor');
   grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-nodemon');
-  grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-env');
 
   grunt.file.mkdir('target/mocha');

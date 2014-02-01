@@ -1,10 +1,9 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-  bcrypt = require('bcrypt'),
-  nconf = require('nconf');
+  bcrypt = require('bcrypt');
 
-var userModel = function () {
+module.exports = function (nconf) {
 
   var roles = 'ADMIN USER'.split(' ');
 
@@ -137,5 +136,3 @@ var userModel = function () {
 
   return mongoose.model('User', userSchema);
 };
-
-module.exports = new userModel();

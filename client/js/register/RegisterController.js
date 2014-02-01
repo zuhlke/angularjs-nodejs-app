@@ -4,7 +4,7 @@ angular.module('myApp.register').controller('RegisterController', function($scop
 
   $scope.errors = {};
 
-  $scope.register = function(user) {
+  $scope.registerAccount = function(user) {
     userService.register(user).then(function() {
       $location.path('/dashboard');
     }, function(resp) {

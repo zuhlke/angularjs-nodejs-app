@@ -1,9 +1,8 @@
 'use strict';
 
-var redis = require('redis'),
-  nconf = require('nconf');
+var redis = require('redis');
 
-module.exports = function (app) {
+module.exports = function (app, nconf) {
 
   var io = require('socket.io').listen(app.listen(nconf.get('port')));
 

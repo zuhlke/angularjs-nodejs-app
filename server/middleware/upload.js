@@ -1,10 +1,8 @@
 'use strict'
 
-var upload = require('jquery-file-upload-middleware'),
-  log4js = require('../lib/logger'),
-  nconf = require('nconf');
+var upload = require('jquery-file-upload-middleware');
 
-module.exports = function (app) {
+module.exports = function (app, logger, nconf) {
 
   upload.configure({
     uploadDir: nconf.get('uploadDirectory'),
@@ -12,7 +10,7 @@ module.exports = function (app) {
   });
 
   upload.on('error', function (e) {
-    log4js.error(e.message);
+    logger.error(e.message);
   });
 
   app.use('/api/v1/upload', upload.fileHandler());
